@@ -3,6 +3,8 @@ package ru.kemsu.openenv.security.service;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -20,6 +22,7 @@ import java.util.Map;
 public class JsonWebTokenService implements TokenService {
 
     private static int tokenExpirationTime = 30;
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     @Value("${security.token.secret.key}")
     private String tokenKey;
@@ -49,7 +52,8 @@ public class JsonWebTokenService implements TokenService {
             JwtBuilder jwtBuilder = Jwts.builder();
             jwtBuilder.setExpiration(calendar.getTime());
             jwtBuilder.setClaims(tokenData);
-            return jwtBuilder.signWith(SignatureAlgorithm.HS512, tokenKey).compact();
+            JwtBuilder jw = jwtBuilder.signWith(SignatureAlgorithm.HS512, tokenKey);
+            return jw.compact();
 
         } else {
             throw new ServiceException("Authentication error", this.getClass().getName());

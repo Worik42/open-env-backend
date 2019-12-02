@@ -1,5 +1,7 @@
 package ru.kemsu.openenv.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,9 @@ import ru.kemsu.openenv.security.service.TokenService;
 @RequestMapping("/api/auth")
 public class AuthenticationController {
 
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
+
+
     private final TokenService tokenService;
 
     @Autowired
@@ -26,6 +31,7 @@ public class AuthenticationController {
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> authenticate(@RequestBody final LoginDTO dto) {
         final String token = tokenService.getToken(dto.getUsername(), dto.getPassword());
+
         if (token != null) {
             final TokenDTO response = new TokenDTO();
             response.setToken(token);
