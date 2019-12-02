@@ -27,6 +27,7 @@ public class SignUpController {
         this.converterFacade = converterFacade;
     }
 
+
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> signUp(@RequestBody final UserDTO dto) {
         return new ResponseEntity<>(service.create(converterFacade.convert(dto)), HttpStatus.OK);
