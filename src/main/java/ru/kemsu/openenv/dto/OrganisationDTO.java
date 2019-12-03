@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 public class OrganisationDTO implements Serializable {
 
-    private static final long serialVersionUID = 91901774547107674L;// какой??
-
     private String name;
     private String position;
     private String descriptions;

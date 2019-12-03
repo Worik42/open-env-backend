@@ -10,7 +10,7 @@ public interface OrganisationService {
 
     Organisation find(String id);
 
-    Organisation findByOrganisationname(String organisationName);
+    Organisation findByName(String organisationName);
 
     List<Organisation> findAll();
 

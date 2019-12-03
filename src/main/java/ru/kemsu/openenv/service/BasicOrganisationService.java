@@ -32,8 +32,8 @@ public class BasicOrganisationService implements OrganisationService {
 
     //не могу создать BasicDetailsOrganisationName ибо такого не существует как с юзером
     @Override
-    public Organisation findByOrganisationname(final String organisationName) {
-        return repository.findByOrganisationname(organisationName);
+    public Organisation findByName(final String organisationName) {
+        return repository.findByName(organisationName);
     }
 
 

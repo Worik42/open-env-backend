@@ -5,6 +5,6 @@ import ru.kemsu.openenv.model.Organisation;
 
 public interface OrganisationRepository extends MongoRepository<Organisation, String> {
 
-    Organisation findByOrganisationname(final String organisationName);
+    Organisation findByName(final String organisationName);
 
 }

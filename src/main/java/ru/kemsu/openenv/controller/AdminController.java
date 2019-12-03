@@ -13,7 +13,6 @@ import ru.kemsu.openenv.service.OrganisationService;
 
 @RestController
 @RequestMapping("/api/admin")
-
 public class AdminController {
 
     private final OrganisationService service;
@@ -28,7 +27,7 @@ public class AdminController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<?> signUp(@RequestBody final OrganisationDTO dto) {
+    public ResponseEntity<?> createOrganisation(@RequestBody final OrganisationDTO dto) {
         return new ResponseEntity<>(service.create(converterFacade.convert(dto)), HttpStatus.OK);
     }
 
