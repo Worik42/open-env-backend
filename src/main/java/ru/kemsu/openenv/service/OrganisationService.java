@@ -4,13 +4,13 @@ import ru.kemsu.openenv.model.Organisation;
 
 import java.util.List;
 
-public interface AdminService {
+public interface OrganisationService {
 
     Organisation create(Organisation object);
 
     Organisation find(String id);
 
-    Organisation findByOrganisationName(String organisationName);
+    Organisation findByOrganisationname(String organisationName);
 
     List<Organisation> findAll();
 

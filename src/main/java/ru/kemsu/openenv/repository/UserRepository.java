@@ -8,5 +8,8 @@ import ru.kemsu.openenv.model.User;
 @Repository
 public interface UserRepository extends MongoRepository<User, String> {
 
+
     User findByUsername(final String userName);
+
+
 }
