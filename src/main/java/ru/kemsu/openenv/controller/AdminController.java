@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import ru.kemsu.openenv.converter.ConverterFacade;
 import ru.kemsu.openenv.dto.OrganisationDTO;
+import ru.kemsu.openenv.model.Organisation;
 import ru.kemsu.openenv.service.OrganisationService;
 
 @RestController
@@ -28,7 +29,9 @@ public class AdminController {
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> createOrganisation(@RequestBody final OrganisationDTO dto) {
-        return new ResponseEntity<>(service.create(converterFacade.convert(dto)), HttpStatus.OK);
+        Organisation org = converterFacade.convert(dto);
+        Organisation ret = service.create(org);
+        return new ResponseEntity<>(ret, HttpStatus.OK);
     }
 
 }
