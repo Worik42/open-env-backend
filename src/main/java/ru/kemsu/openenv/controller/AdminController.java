@@ -8,28 +8,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import ru.kemsu.openenv.converter.ConverterFacade;
-import ru.kemsu.openenv.dto.UserDTO;
-import ru.kemsu.openenv.service.UserService;
-
+import ru.kemsu.openenv.dto.OrganisationDTO;
+import ru.kemsu.openenv.model.Organisation;
+import ru.kemsu.openenv.service.OrganisationService;
 
 @RestController
-@RequestMapping("/api/signup")
-public class SignUpController {
+@RequestMapping("/api/admin")
+public class AdminController {
 
-    private final UserService service;
+    private final OrganisationService service;
 
     private final ConverterFacade converterFacade;
 
     @Autowired
-    public SignUpController(final UserService service,
-                            final ConverterFacade converterFacade) {
+    public AdminController(final OrganisationService service,
+                           final ConverterFacade converterFacade) {
         this.service = service;
         this.converterFacade = converterFacade;
     }
 
-
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<?> signUp(@RequestBody final UserDTO dto) {
-        return new ResponseEntity<>(service.create(converterFacade.convert(dto)), HttpStatus.OK);
+    public ResponseEntity<?> createOrganisation(@RequestBody final OrganisationDTO dto) {
+        Organisation org = converterFacade.convert(dto);
+        Organisation ret = service.create(org);
+        return new ResponseEntity<>(ret, HttpStatus.OK);
     }
+
 }

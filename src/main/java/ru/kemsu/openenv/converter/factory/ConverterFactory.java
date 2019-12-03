@@ -2,7 +2,9 @@ package ru.kemsu.openenv.converter.factory;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
+import ru.kemsu.openenv.converter.dto.OrganisationDTOConverter;
 import ru.kemsu.openenv.converter.dto.UserDTOConverter;
+import ru.kemsu.openenv.dto.OrganisationDTO;
 import ru.kemsu.openenv.dto.UserDTO;
 
 import javax.annotation.PostConstruct;
@@ -23,6 +25,7 @@ public class ConverterFactory {
     public void init() {
         converters = new HashMap<>();
         converters.put(UserDTO.class, new UserDTOConverter());
+        converters.put(OrganisationDTO.class, new OrganisationDTOConverter());
     }
 
     public Converter getConverter(final Object type) {
