@@ -11,7 +11,7 @@ public class OrganisationDTOConverter implements Converter<OrganisationDTO, Orga
     public Organisation convert(final OrganisationDTO dto) {
         final Organisation organisation = new Organisation();
 
-        organisation.setName(dto.setName());
+        organisation.setName(dto.getName());
         organisation.setPosition(dto.getPosition());
         organisation.setDescriptions(dto.getDescriptions());
 

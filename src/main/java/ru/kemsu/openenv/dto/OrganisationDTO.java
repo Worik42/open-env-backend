@@ -1,38 +1,39 @@
 package ru.kemsu.openenv.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class OrganisationDTO implements Serializable {
 
     private String name;
-    private String position;
-    private String descriptions;
+    private Double[] position;
+    private ArrayList<String> descriptions;
 
-    public OrganisationDTO() {
-    }
-
-    public String setName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(final String username) {
-        this.name = username;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getPosition() {
+    public Double[] getPosition() {
         return position;
     }
 
-    public void setPosition(final String password) {
-        this.position = password;
+    public void setPosition(Double[] position) {
+        this.position = position;
     }
 
-    public String getDescriptions() {
+    public ArrayList<String> getDescriptions() {
         return descriptions;
     }
 
-    public void setDescriptions(final String password) {
-        this.descriptions = password;
+    public void setDescriptions(ArrayList<String> descriptions) {
+        this.descriptions = descriptions;
+    }
+
+    public OrganisationDTO() {
     }
 
 }
