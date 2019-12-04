@@ -1,12 +1,13 @@
 package ru.kemsu.openenv.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Organisation extends BaseEntity implements Serializable {
 
     private String name;
-    private String position;
-    private String descriptions;
+    private Double[] position;
+    private ArrayList<String> descriptions;
 
 
     public String getName() {
@@ -17,19 +18,19 @@ public class Organisation extends BaseEntity implements Serializable {
         this.name = name;
     }
 
-    public String getPosition() {
+    public Double[] getPosition() {
         return position;
     }
 
-    public void setPosition(String position) {
+    public void setPosition(Double[] position) {
         this.position = position;
     }
 
-    public String getDescriptions() {
+    public ArrayList<String> getDescriptions() {
         return descriptions;
     }
 
-    public void setDescriptions(String descriptions) {
+    public void setDescriptions(ArrayList<String> descriptions) {
         this.descriptions = descriptions;
     }
 
