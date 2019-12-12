@@ -1,11 +1,13 @@
 package ru.kemsu.openenv.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import ru.kemsu.openenv.model.Organisation;
 import ru.kemsu.openenv.repository.OrganisationRepository;
 
 import java.util.List;
 
+@Service
 public class BasicMapService implements MapService {
 
     private final OrganisationRepository repository;
