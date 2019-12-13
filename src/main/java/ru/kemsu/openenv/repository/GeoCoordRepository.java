@@ -7,6 +7,6 @@ import ru.kemsu.openenv.model.GeoCoord;
 @Repository
 public interface GeoCoordRepository extends MongoRepository<GeoCoord, String> {
 
-    GeoCoord findByName(final String geoCoordName);
+    GeoCoord findByCoordinate(final String coordinate);
 
 }

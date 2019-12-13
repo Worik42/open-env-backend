@@ -14,13 +14,10 @@ public class BasicGeoCoordService implements GeoCoordService {
     @Autowired
     private GeoCoordRepository repository;
 
-//    public BasicGeoCoordService(final GeoCoordRepository repository) {
-//        this.repository = repository;
-//    }
 
     @Override
-    public GeoCoord findByName(final String geoCoordName) {
-        return repository.findByName(geoCoordName);
+    public GeoCoord findByCoordinate(final String geoCoordname) {
+        return repository.findByCoordinate(geoCoordname);
     }
 
     @Override

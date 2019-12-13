@@ -9,22 +9,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import ru.kemsu.openenv.converter.ConverterFacade;
 import ru.kemsu.openenv.dto.OrganisationDTO;
+import ru.kemsu.openenv.model.GeoCoord;
 import ru.kemsu.openenv.model.Organisation;
+import ru.kemsu.openenv.service.GeoCoordService;
 import ru.kemsu.openenv.service.OrganisationService;
 
 @RestController
 @RequestMapping("/api/admin")
 public class AdminController {
     private final OrganisationService service;
-//    private final GeoCoordService geoservice;
-
+    private final GeoCoordService geoservice;
     private final ConverterFacade converterFacade;
 
     @Autowired
-    public AdminController(OrganisationService service, ConverterFacade converterFacade) {
+    public AdminController(OrganisationService service, GeoCoordService geoservice, ConverterFacade converterFacade) {
         this.service = service;
-//        this.geoservice = geoservice;
         this.converterFacade = converterFacade;
+        this.geoservice = geoservice;
     }
 
 
@@ -32,7 +33,13 @@ public class AdminController {
     public ResponseEntity<?> createOrganisation(@RequestBody final OrganisationDTO dto) {
         Organisation org = converterFacade.convert(dto);
         Organisation ret = service.create(org);
-        return new ResponseEntity<>(ret, HttpStatus.OK);
+
+        String id = service.findByName(org.getName()).getId();
+        GeoCoord geo = new GeoCoord();
+        geo.setId(id);
+        geo.setCoordinate(org.getPosition());
+        geoservice.create(geo);
+        return new ResponseEntity<>(geo, HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.DELETE)

@@ -13,11 +13,11 @@ public class BasicOrganisationService implements OrganisationService {
 
     private final OrganisationRepository repository;
 
+
     @Autowired
     public BasicOrganisationService(final OrganisationRepository repository) {
         this.repository = repository;
     }
-
 
 
     @Override

@@ -1,14 +1,12 @@
 package ru.kemsu.openenv.dto;
 
-import ru.kemsu.openenv.model.Coordinate;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class OrganisationDTO implements Serializable {
 
     private String name;
-    private ArrayList<Coordinate> position;
+    private ArrayList<CoordinateDTO> position;
     private ArrayList<String> descriptions;
 
     public String getName() {
@@ -19,11 +17,11 @@ public class OrganisationDTO implements Serializable {
         this.name = name;
     }
 
-    public ArrayList<Coordinate> getPosition() {
+    public ArrayList<CoordinateDTO> getPosition() {
         return position;
     }
 
-    public void setPosition(ArrayList<Coordinate> position) {
+    public void setPosition(ArrayList<CoordinateDTO> position) {
         this.position = position;
     }
 

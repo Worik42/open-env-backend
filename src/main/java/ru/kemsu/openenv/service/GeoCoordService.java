@@ -10,7 +10,7 @@ public interface GeoCoordService {
 
     GeoCoord find(String id);
 
-    GeoCoord findByName(String geoCoordName);
+    GeoCoord findByCoordinate(String geoCoordname);
 
     List<GeoCoord> findAll();
 

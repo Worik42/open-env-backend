@@ -1,19 +1,17 @@
 package ru.kemsu.openenv.dto;
 
-import ru.kemsu.openenv.model.Coordinate;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class GeoCoordDTO implements Serializable {
 
-    private ArrayList<Coordinate> coordinate;
+    private ArrayList<CoordinateDTO> coordinate;
 
-    public ArrayList<Coordinate> getCoordinate() {
+    public ArrayList<CoordinateDTO> getCoordinate() {
         return coordinate;
     }
 
-    public void setCoordinate(ArrayList<Coordinate> coordinate) {
+    public void setCoordinate(ArrayList<CoordinateDTO> coordinate) {
         this.coordinate = coordinate;
     }
 

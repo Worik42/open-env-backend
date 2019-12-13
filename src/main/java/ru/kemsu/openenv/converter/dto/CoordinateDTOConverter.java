@@ -13,11 +13,7 @@ public class CoordinateDTOConverter implements Converter<CoordinateDTO, Coordina
 
         coord.setLatitude(dto.getLatitude());
         coord.setLongitude(dto.getLongitude());
-        //geoCoord.setId(dto.getId());
 
-        coord.getLatitude();
-        coord.getLongitude();
-        //geoCoord.getId();
         return coord;
     }
 }
