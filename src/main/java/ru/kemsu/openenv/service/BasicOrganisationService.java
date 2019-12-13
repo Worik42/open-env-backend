@@ -19,6 +19,7 @@ public class BasicOrganisationService implements OrganisationService {
     }
 
 
+
     @Override
     public Organisation create(final Organisation organisation) {
         organisation.setCreatedAt(String.valueOf(LocalDateTime.now()));
@@ -26,8 +27,8 @@ public class BasicOrganisationService implements OrganisationService {
     }
 
     @Override
-    public Organisation find(final String id) {
-        return repository.findOne(id);
+    public Organisation find(String id) {
+        return repository.findById(id).get();
     }
 
     //не могу создать BasicDetailsOrganisationName ибо такого не существует как с юзером
@@ -46,7 +47,7 @@ public class BasicOrganisationService implements OrganisationService {
     public Organisation update(final String id, final Organisation organisation) {
         organisation.setId(id);
 
-        final Organisation saved = repository.findOne(id);
+        final Organisation saved = repository.findById(id).get();
 
         if (saved != null) {
             organisation.setCreatedAt(saved.getCreatedAt());
@@ -60,7 +61,7 @@ public class BasicOrganisationService implements OrganisationService {
 
     @Override
     public String delete(final String id) {
-        repository.delete(id);
+        repository.deleteById(id);
         return id;
     }
 
