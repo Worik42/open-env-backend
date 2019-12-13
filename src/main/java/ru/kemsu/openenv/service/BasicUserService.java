@@ -2,6 +2,7 @@ package ru.kemsu.openenv.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.kemsu.openenv.exception.model.UserAlreadyCreatedException;
 import ru.kemsu.openenv.model.User;
 import ru.kemsu.openenv.repository.UserRepository;
 
@@ -21,8 +22,13 @@ public class BasicUserService implements UserService {
 
     @Override
     public User create(final User user) {
-        user.setCreatedAt(String.valueOf(LocalDateTime.now()));
-        return repository.save(user);
+        User _user = repository.findByUsername(user.getUsername());
+        if (_user != null) {
+            throw new UserAlreadyCreatedException("Пользователь уже существует");
+        } else {
+            user.setCreatedAt(String.valueOf(LocalDateTime.now()));
+            return repository.save(user);
+        }
     }
 
     @Override

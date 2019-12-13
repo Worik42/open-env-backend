@@ -6,6 +6,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
@@ -30,7 +31,7 @@ public class JsonWebTokenService implements TokenService {
     private final UserDetailsService userDetailsService;
 
     @Autowired
-    public JsonWebTokenService(final UserDetailsService userDetailsService) {
+    public JsonWebTokenService(@Qualifier("basicUserDetailsService") final UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
 
