@@ -27,10 +27,27 @@ public class AdminController {
         this.converterFacade = converterFacade;
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> createOrganisation(@RequestBody final OrganisationDTO dto) {
         Organisation org = converterFacade.convert(dto);
         Organisation ret = service.create(org);
+        return new ResponseEntity<>(ret, HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteOrganisation(@RequestBody final OrganisationDTO dto) {
+        Organisation org = converterFacade.convert(dto);
+        Organisation temp = service.findByName(org.getName());
+        service.delete(temp.getId());
+        return new ResponseEntity<>("yep", HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<?> changeOrganisation(@RequestBody final OrganisationDTO dto) {
+        Organisation org = converterFacade.convert(dto);
+        Organisation tempid = service.findByName(org.getName());
+        //String id = org.getId();
+        Organisation ret = service.update(tempid.getId(), org);
         return new ResponseEntity<>(ret, HttpStatus.OK);
     }
 
