@@ -15,17 +15,18 @@ import ru.kemsu.openenv.service.OrganisationService;
 @RestController
 @RequestMapping("/api/admin")
 public class AdminController {
-
     private final OrganisationService service;
+//    private final GeoCoordService geoservice;
 
     private final ConverterFacade converterFacade;
 
     @Autowired
-    public AdminController(final OrganisationService service,
-                           final ConverterFacade converterFacade) {
+    public AdminController(OrganisationService service, ConverterFacade converterFacade) {
         this.service = service;
+//        this.geoservice = geoservice;
         this.converterFacade = converterFacade;
     }
+
 
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> createOrganisation(@RequestBody final OrganisationDTO dto) {

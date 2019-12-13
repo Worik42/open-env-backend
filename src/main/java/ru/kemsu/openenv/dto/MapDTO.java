@@ -1,10 +1,12 @@
 package ru.kemsu.openenv.dto;
 
+import ru.kemsu.openenv.model.Coordinate;
+
 import java.util.ArrayList;
 
 public class MapDTO {
     private String name;
-    private Double[] position;
+    private ArrayList<Coordinate> position;
     private ArrayList<String> descriptions;
 
     public MapDTO() {
@@ -14,7 +16,7 @@ public class MapDTO {
         return name;
     }
 
-    public Double[] getPosition() {
+    public ArrayList<Coordinate> getPosition() {
         return position;
     }
 

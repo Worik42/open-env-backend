@@ -19,7 +19,7 @@ public class BasicMapService implements MapService {
 
     @Override
     public Organisation find(final String id) {
-        return repository.findOne(id);
+        return repository.findById(id).get();
     }
 
     @Override

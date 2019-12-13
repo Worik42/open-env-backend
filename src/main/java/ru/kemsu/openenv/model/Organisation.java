@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Organisation extends BaseEntity implements Serializable {
 
     private String name;
-    private Double[] position;
+    private ArrayList<Coordinate> position;
     private ArrayList<String> descriptions;
 
 
@@ -18,11 +18,12 @@ public class Organisation extends BaseEntity implements Serializable {
         this.name = name;
     }
 
-    public Double[] getPosition() {
+
+    public ArrayList<Coordinate> getPosition() {
         return position;
     }
 
-    public void setPosition(Double[] position) {
+    public void setPosition(ArrayList<Coordinate> position) {
         this.position = position;
     }
 
