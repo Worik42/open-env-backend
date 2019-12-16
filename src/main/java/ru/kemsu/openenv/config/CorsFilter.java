@@ -20,7 +20,8 @@ public class CorsFilter implements Filter, WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**");
+        registry.addMapping("/**").allowedOrigins("http://localhost:8080");
+        ;
     }
 
     @Override
@@ -33,7 +34,7 @@ public class CorsFilter implements Filter, WebMvcConfigurer {
         response.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, x-auth-token, X-Requested-With,observe");
         response.setHeader("Access-Control-Max-Age", "3600");
         response.setHeader("Access-Control-Allow-Credentials", "true");
-        response.setHeader("Access-Control-Expose-Headers", "Authorization");
+        response.setHeader("Access-Control-Expose-Headers", "x-auth-token");
         response.addHeader("Access-Control-Expose-Headers", "responseType");
         response.addHeader("Access-Control-Expose-Headers", "observe");
         System.out.println("Request Method: " + request.getMethod());
@@ -48,9 +49,9 @@ public class CorsFilter implements Filter, WebMvcConfigurer {
             response.setHeader("Access-Control-Allow-Origin", "*");
             response.setHeader("Access-Control-Allow-Methods", "POST,GET,DELETE,PUT");
             response.setHeader("Access-Control-Max-Age", "3600");
-            response.setHeader("Access-Control-Allow-Headers", "Access-Control-Expose-Headers" + "Authorization, content-type," +
+            response.setHeader("Access-Control-Allow-Headers", "Access-Control-Expose-Headers" + "x-auth-token, content-type," +
                     "USERID" + "ROLE" +
-                    "access-control-request-headers,access-control-request-method,accept,origin,authorization,x-requested-with,responseType,observe");
+                    "access-control-request-headers,access-control-request-method,accept,origin,x-auth-token,x-requested-with,responseType,observe");
             response.setStatus(HttpServletResponse.SC_OK);
         }
 
