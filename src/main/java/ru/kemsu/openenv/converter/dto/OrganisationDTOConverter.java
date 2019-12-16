@@ -23,7 +23,7 @@ public class OrganisationDTOConverter implements Converter<OrganisationDTO, Orga
         ) {
             Coordinate coordinate = new Coordinate();
             coordinate.setLatitude(coodr.getLatitude());
-            coordinate.setLongitude(coodr.getLatitude());
+            coordinate.setLongitude(coodr.getLongitude());
             coo.add(coordinate);
         }
 

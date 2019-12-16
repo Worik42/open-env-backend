@@ -24,5 +24,6 @@ public class CoordinateDTO implements Serializable {
     }
 
     public CoordinateDTO() {
+
     }
 }
