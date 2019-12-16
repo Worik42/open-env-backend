@@ -7,7 +7,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsUtils;
 import ru.kemsu.openenv.security.filter.AuthenticationTokenFilter;
 import ru.kemsu.openenv.security.service.TokenAuthenticationService;
 
@@ -27,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(final HttpSecurity http) throws Exception {
         http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
         http.authorizeRequests()
-                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
+//                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                 .antMatchers("/api/auth").permitAll()
                 .antMatchers("/api/signup").permitAll()
                 .antMatchers("/v2/api-docs").permitAll()
