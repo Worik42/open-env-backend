@@ -14,6 +14,8 @@ import ru.kemsu.openenv.model.Organisation;
 import ru.kemsu.openenv.service.GeoCoordService;
 import ru.kemsu.openenv.service.OrganisationService;
 
+import javax.servlet.http.HttpServletResponse;
+
 @RestController
 @RequestMapping("/api/admin")
 public class AdminController {
@@ -28,6 +30,13 @@ public class AdminController {
         this.geoservice = geoservice;
     }
 
+    @RequestMapping(method = RequestMethod.OPTIONS)
+    public void corsHeaders(HttpServletResponse response) {
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        response.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+        response.addHeader("Access-Control-Allow-Headers", "origin, content-type, accept, x-requested-with");
+        response.addHeader("Access-Control-Max-Age", "3600");
+    }
 
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> createOrganisation(@RequestBody final OrganisationDTO dto) {
