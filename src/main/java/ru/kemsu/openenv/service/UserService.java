@@ -1,6 +1,5 @@
 package ru.kemsu.openenv.service;
 
-import ru.kemsu.openenv.dto.RoleDTO;
 import ru.kemsu.openenv.model.User;
 
 import java.util.List;
@@ -20,5 +19,5 @@ public interface UserService {
 
     String delete(String id);
 
-    User changeRole(RoleDTO dto);
+    User changeRole(String name, boolean isAdmin);
 }
