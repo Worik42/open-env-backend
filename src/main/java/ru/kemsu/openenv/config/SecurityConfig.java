@@ -25,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
 //        http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
-        http.cors().and().authorizeRequests()
+        http.authorizeRequests()
                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                 .antMatchers("/api/auth").permitAll()
                 .antMatchers("/api/signup").permitAll()

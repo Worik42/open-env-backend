@@ -1,5 +1,7 @@
 package ru.kemsu.openenv.config;
 
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
@@ -9,6 +11,7 @@ import java.io.IOException;
 
 
 @Component
+@Order(Ordered.HIGHEST_PRECEDENCE)
 public class CorsFilter implements Filter {
 
     @Override
