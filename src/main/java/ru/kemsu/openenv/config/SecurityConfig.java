@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsUtils;
+import ru.kemsu.openenv.model.Authority;
 import ru.kemsu.openenv.security.filter.AuthenticationTokenFilter;
 import ru.kemsu.openenv.security.service.TokenAuthenticationService;
 
@@ -30,6 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/auth").permitAll()
                 .antMatchers("/api/signup").permitAll()
                 .antMatchers("/v2/api-docs").permitAll()
+                .antMatchers("/api/admin").hasAuthority(Authority.ROLE_ADMIN.getAuthority())
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(new AuthenticationTokenFilter(tokenAuthenticationService),

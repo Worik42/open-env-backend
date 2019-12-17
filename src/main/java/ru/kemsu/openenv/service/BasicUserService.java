@@ -2,11 +2,14 @@ package ru.kemsu.openenv.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.kemsu.openenv.dto.RoleDTO;
 import ru.kemsu.openenv.exception.model.UserAlreadyCreatedException;
+import ru.kemsu.openenv.model.Authority;
 import ru.kemsu.openenv.model.User;
 import ru.kemsu.openenv.repository.UserRepository;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -66,5 +69,23 @@ public class BasicUserService implements UserService {
     public String delete(final String id) {
         repository.deleteById(id);
         return id;
+    }
+
+    @Override
+    public User changeRole(RoleDTO dto) {
+        final User user = repository.findByUsername(dto.getUsername());
+        if (user != null) {
+            List<Authority> authorities = new ArrayList<>();
+            if (dto.isAdmin())
+                authorities.add(Authority.ROLE_ADMIN);
+            else
+                authorities.add(Authority.ROLE_USER);
+
+            user.setAuthorities(authorities);
+            repository.save(user);
+            return user;
+        } else {
+            return null;
+        }
     }
 }

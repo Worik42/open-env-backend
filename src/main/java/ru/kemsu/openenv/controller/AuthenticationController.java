@@ -5,17 +5,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.kemsu.openenv.dto.LoginDTO;
+import ru.kemsu.openenv.dto.MessagesDTO;
+import ru.kemsu.openenv.dto.RoleDTO;
 import ru.kemsu.openenv.dto.TokenDTO;
+import ru.kemsu.openenv.model.User;
 import ru.kemsu.openenv.security.service.TokenService;
+import ru.kemsu.openenv.service.UserService;
 
 
 @RestController
-@RequestMapping("/api/auth")
 public class AuthenticationController {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -23,12 +23,15 @@ public class AuthenticationController {
 
     private final TokenService tokenService;
 
+    private final UserService service;
+
     @Autowired
-    public AuthenticationController(final TokenService tokenService) {
+    public AuthenticationController(final TokenService tokenService, UserService service) {
         this.tokenService = tokenService;
+        this.service = service;
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "/api/auth", method = RequestMethod.POST)
     public ResponseEntity<?> authenticate(@RequestBody final LoginDTO dto) {
         final String token = tokenService.getToken(dto.getUsername(), dto.getPassword());
 
@@ -40,4 +43,25 @@ public class AuthenticationController {
             return new ResponseEntity<>("Authentication failed", HttpStatus.BAD_REQUEST);
         }
     }
+
+    @RequestMapping(value = "/api/user/changeRole", method = RequestMethod.POST)
+    public ResponseEntity<?> changeRole(@RequestBody final RoleDTO dto) {
+        User user = service.changeRole(dto);
+        if (user != null)
+            return new ResponseEntity<>(dto, HttpStatus.OK);
+        else
+            return new ResponseEntity<>(new MessagesDTO("User not found"), HttpStatus.BAD_REQUEST);
+    }
+
+    @RequestMapping(value = "/api/user/getRole/{}", method = RequestMethod.POST)
+    public ResponseEntity<?> getRole(@RequestHeader() final RoleDTO dto) {
+        User user = service.changeRole(dto);
+        if (user != null)
+            return new ResponseEntity<>(dto, HttpStatus.OK);
+        else
+            return new ResponseEntity<>(new MessagesDTO("User not found"), HttpStatus.BAD_REQUEST);
+    }
+
+
+
 }
