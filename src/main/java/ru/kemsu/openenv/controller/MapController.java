@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import ru.kemsu.openenv.converter.ConverterFacade;
-import ru.kemsu.openenv.model.Organisation;
+import ru.kemsu.openenv.model.GeoCoord;
 import ru.kemsu.openenv.service.MapService;
 
 import java.util.List;
@@ -28,7 +28,7 @@ public class MapController {
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<?> getAllOrganisation() {
-        List<Organisation> listOrg = service.findAll();
+        List<GeoCoord> listOrg = service.findAll();
         return new ResponseEntity<>(listOrg, HttpStatus.OK);
     }
 }

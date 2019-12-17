@@ -1,15 +1,15 @@
 package ru.kemsu.openenv.service;
 
-import ru.kemsu.openenv.model.Organisation;
+import ru.kemsu.openenv.model.GeoCoord;
 
 import java.util.List;
 
 public interface MapService {
 
-    Organisation find(String id);
+    GeoCoord find(String id);
 
-    Organisation findByName(String organisationName);
+    GeoCoord findByCoordinate(String geoCoordName);
 
-    List<Organisation> findAll();
+    List<GeoCoord> findAll();
 
 }

@@ -2,22 +2,18 @@ package ru.kemsu.openenv.converter.dto;
 
 import org.springframework.core.convert.converter.Converter;
 import ru.kemsu.openenv.dto.MapDTO;
-import ru.kemsu.openenv.model.Organisation;
+import ru.kemsu.openenv.model.GeoCoord;
 
-public class MapDTOConverter implements Converter<MapDTO, Organisation> {
+public class MapDTOConverter implements Converter<MapDTO, GeoCoord> {
 
     @Override
-    public Organisation convert(final MapDTO dto) {
-        final Organisation organisation = new Organisation();
+    public GeoCoord convert(final MapDTO dto) {
+        final GeoCoord geocoord = new GeoCoord();
 
-        organisation.setName(dto.getName());
-        organisation.setPosition(dto.getPosition());
-        organisation.setDescriptions(dto.getDescriptions());
+        geocoord.setCoordinate(dto.getCoordinate());
 
-        organisation.getName();
-        organisation.getPosition();
-        organisation.getDescriptions();
+        geocoord.getCoordinate();
 
-        return organisation;
+        return geocoord;
     }
 }

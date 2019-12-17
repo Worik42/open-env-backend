@@ -2,26 +2,17 @@ package ru.kemsu.openenv.dto;
 
 import ru.kemsu.openenv.model.Coordinate;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class MapDTO {
-    private String name;
-    private ArrayList<Coordinate> position;
-    private ArrayList<String> descriptions;
+public class MapDTO implements Serializable {
+    private ArrayList<Coordinate> coord;
 
     public MapDTO() {
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public ArrayList<Coordinate> getPosition() {
-        return position;
-    }
-
-    public ArrayList<String> getDescriptions() {
-        return descriptions;
+    public ArrayList<Coordinate> getCoordinate() {
+        return coord;
     }
 
 }
