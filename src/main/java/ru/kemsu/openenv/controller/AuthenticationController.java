@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import ru.kemsu.openenv.dto.LoginDTO;
-import ru.kemsu.openenv.dto.MessagesDTO;
+import ru.kemsu.openenv.dto.MessageDTO;
 import ru.kemsu.openenv.dto.RoleDTO;
 import ru.kemsu.openenv.dto.TokenDTO;
 import ru.kemsu.openenv.model.User;
@@ -53,7 +53,7 @@ public class AuthenticationController {
         if (user != null)
             return new ResponseEntity<>(dto, HttpStatus.OK);
         else
-            return new ResponseEntity<>(new MessagesDTO("User not found"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new MessageDTO("User not found"), HttpStatus.BAD_REQUEST);
     }
 
 }
