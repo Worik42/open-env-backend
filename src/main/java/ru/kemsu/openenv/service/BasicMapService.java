@@ -2,33 +2,33 @@ package ru.kemsu.openenv.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.kemsu.openenv.model.Organisation;
-import ru.kemsu.openenv.repository.OrganisationRepository;
+import ru.kemsu.openenv.model.GeoCoord;
+import ru.kemsu.openenv.repository.GeoCoordRepository;
 
 import java.util.List;
 
 @Service
 public class BasicMapService implements MapService {
 
-    private final OrganisationRepository repository;
+    private final GeoCoordRepository repository;
 
     @Autowired
-    public BasicMapService(final OrganisationRepository repository) {
+    public BasicMapService(final GeoCoordRepository repository) {
         this.repository = repository;
     }
 
     @Override
-    public Organisation find(final String id) {
+    public GeoCoord find(final String id) {
         return repository.findById(id).get();
     }
 
     @Override
-    public Organisation findByName(final String organisationName) {
-        return repository.findByName(organisationName);
+    public GeoCoord findByCoordinate(final String geoCoordName) {
+        return repository.findByCoordinate(geoCoordName);
     }
 
     @Override
-    public List<Organisation> findAll() {
+    public List<GeoCoord> findAll() {
         return repository.findAll();
     }
 
