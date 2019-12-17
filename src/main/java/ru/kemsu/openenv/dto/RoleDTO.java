@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class RoleDTO implements Serializable {
     private String username;
 
-    private boolean isAdmin;
+    private int isAdmin;
 
     public RoleDTO() {
     }
@@ -18,11 +18,11 @@ public class RoleDTO implements Serializable {
         this.username = username;
     }
 
-    public boolean isAdmin() {
+    public int getIsAdmin() {
         return isAdmin;
     }
 
-    public void setAdmin(boolean admin) {
-        isAdmin = admin;
+    public void setIsAdmin(int isAdmin) {
+        this.isAdmin = isAdmin;
     }
 }

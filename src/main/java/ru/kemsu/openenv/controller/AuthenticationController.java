@@ -49,7 +49,7 @@ public class AuthenticationController {
 
     @RequestMapping(value = "/api/user/changeRole", method = RequestMethod.POST)
     public ResponseEntity<?> changeRole(@RequestBody final RoleDTO dto) {
-        User user = service.changeRole(dto.getUsername(), dto.isAdmin());
+        User user = service.changeRole(dto.getUsername(), dto.getIsAdmin() != 0);
         if (user != null)
             return new ResponseEntity<>(dto, HttpStatus.OK);
         else
