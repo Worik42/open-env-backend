@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import ru.kemsu.openenv.converter.ConverterFacade;
+import ru.kemsu.openenv.dto.MessageDTO;
 import ru.kemsu.openenv.dto.OrganisationDTO;
 import ru.kemsu.openenv.model.GeoCoord;
 import ru.kemsu.openenv.model.Organisation;
@@ -41,8 +42,6 @@ public class AdminController {
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> createOrganisation(@RequestBody final OrganisationDTO dto) {
         Organisation org = converterFacade.convert(dto);
-        Organisation ret = service.create(org);
-
         String id = service.findByName(org.getName()).getId();
         GeoCoord geo = new GeoCoord();
         geo.setId(id);
@@ -56,14 +55,13 @@ public class AdminController {
         Organisation org = converterFacade.convert(dto);
         Organisation temp = service.findByName(org.getName());
         service.delete(temp.getId());
-        return new ResponseEntity<>("yep", HttpStatus.OK);
+        return new ResponseEntity<>(new MessageDTO("Success"), HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> changeOrganisation(@RequestBody final OrganisationDTO dto) {
         Organisation org = converterFacade.convert(dto);
         Organisation tempid = service.findByName(org.getName());
-        //String id = org.getId();
         Organisation ret = service.update(tempid.getId(), org);
         return new ResponseEntity<>(ret, HttpStatus.OK);
     }
