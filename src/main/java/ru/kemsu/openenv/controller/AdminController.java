@@ -42,6 +42,7 @@ public class AdminController {
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> createOrganisation(@RequestBody final OrganisationDTO dto) {
         Organisation org = converterFacade.convert(dto);
+        service.create(org);
         String id = service.findByName(org.getName()).getId();
         GeoCoord geo = new GeoCoord();
         geo.setId(id);

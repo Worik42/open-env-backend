@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class MapDTO implements Serializable {
     private ArrayList<Coordinate> coord;
 
+
     public MapDTO() {
     }
 
