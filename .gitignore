@@ -112,6 +112,5 @@ buildNumber.properties
 # Project specific
 node
 .gradle/
-build
 build/
-build-tools/
+build-tools/*
