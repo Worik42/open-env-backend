@@ -16,7 +16,7 @@ import ru.kemsu.openenv.service.OrganisationService
 import javax.servlet.http.HttpServletResponse
 
 @RestController
-@RequestMapping("/api/admin")
+@RequestMapping("/api/v1/admin")
 class AdminController @Autowired constructor(private val service: OrganisationService, private val geoservice: GeoCoordService, private val converterFacade: ConverterFacade) {
     @RequestMapping(method = [RequestMethod.OPTIONS])
     fun corsHeaders(response: HttpServletResponse) {

@@ -12,8 +12,12 @@ public class User extends BaseEntity implements UserDetails {
     private static final long serialVersionUID = 7954325925563724664L;
 
     private List<Authority> authorities;
-    private String username;
+    private String firstName;
+    private String lastName;
+    private String patronymic;
+    private String dateOfBirth;
     private String password;
+    private String username;
     private boolean accountNonExpired;
     private boolean accountNonLocked;
     private boolean credentialsNonExpired;
@@ -29,9 +33,46 @@ public class User extends BaseEntity implements UserDetails {
         return password;
     }
 
+
     @Override
     public String getUsername() {
         return username;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getPatronymic() {
+        return patronymic;
+    }
+
+    public void setPatronymic(String patronymic) {
+        this.patronymic = patronymic;
+    }
+
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     @Override

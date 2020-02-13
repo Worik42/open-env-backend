@@ -12,7 +12,7 @@ import ru.kemsu.openenv.dto.UserDTO
 import ru.kemsu.openenv.service.UserService
 
 @RestController
-@RequestMapping("/api/signup")
+@RequestMapping("/api/v1/signup")
 class SignUpController @Autowired constructor(private val service: UserService,
                                               private val converterFacade: ConverterFacade) {
     @RequestMapping(method = [RequestMethod.POST])
@@ -21,3 +21,4 @@ class SignUpController @Autowired constructor(private val service: UserService,
     }
 
 }
+//"username": "46409409-2951-415d-b050-48e9962837aa"

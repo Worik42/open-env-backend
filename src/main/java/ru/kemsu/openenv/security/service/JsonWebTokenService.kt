@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.security.core.userdetails.UserDetailsService
+import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder
 import org.springframework.stereotype.Service
 import ru.kemsu.openenv.exception.model.ServiceException
 import ru.kemsu.openenv.model.User
@@ -21,12 +22,13 @@ class JsonWebTokenService @Autowired constructor(@param:Qualifier("basicUserDeta
     private val tokenKey: String? = null
 
     override fun getToken(username: String, password: String): String? {
+        val encoder = Pbkdf2PasswordEncoder()
         if (username == null || password == null) {
             return null
         }
         val user = userDetailsService.loadUserByUsername(username) as User
         val tokenData: MutableMap<String, Any> = HashMap()
-        return if (password == user.password) {
+        return if (encoder.matches(password, user.password)) {
             tokenData["clientType"] = "user"
             tokenData["userID"] = user.id
             tokenData["username"] = user.username

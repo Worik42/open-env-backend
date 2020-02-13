@@ -1,6 +1,7 @@
 package ru.kemsu.openenv.service
 
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder
 import org.springframework.stereotype.Service
 import ru.kemsu.openenv.exception.model.UserAlreadyCreatedException
 import ru.kemsu.openenv.model.Authority
@@ -11,12 +12,20 @@ import java.util.*
 
 @Service
 class BasicUserService @Autowired constructor(private val repository: UserRepository) : UserService {
+
+//    @Bean
+//    fun encoder(): Pbkdf2PasswordEncoder {
+//        return Pbkdf2PasswordEncoder()
+//    }
+
     override fun create(user: User): User {
+        val encoder = Pbkdf2PasswordEncoder()
         val _user = repository.findByUsername(user.username)
         return if (_user != null) {
             throw UserAlreadyCreatedException("Пользователь уже существует")
         } else {
             user.createdAt = LocalDateTime.now().toString()
+            user.password = encoder.encode(user.password)
             repository.save(user)
         }
     }

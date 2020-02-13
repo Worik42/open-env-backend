@@ -23,16 +23,16 @@ open class SecurityConfig : WebSecurityConfigurerAdapter() {
     }
 
     @Throws(Exception::class)
-    override fun configure(http: HttpSecurity) { //        http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
+    override fun configure(http: HttpSecurity) {
         http.authorizeRequests()
                 .requestMatchers(RequestMatcher { request: HttpServletRequest -> CorsUtils.isPreFlightRequest(request) }).permitAll()
                 .antMatchers("/api/auth").permitAll()
-                .antMatchers("/api/signup").permitAll()
+                .antMatchers("/api/v1/signup").permitAll()
                 .antMatchers("/v2/api-docs").permitAll()
-                .antMatchers("/api/admin").hasAuthority(Authority.ROLE_ADMIN.authority)
+                .antMatchers("/api/v1/admin").hasAuthority(Authority.ROLE_ADMIN.authority)
                 .anyRequest().authenticated()
                 .and()
-                .addFilterBefore(AuthenticationTokenFilter(tokenAuthenticationService),
+                .addFilterBefore(AuthenticationTokenFilter(tokenAuthenticationService!!),
                         UsernamePasswordAuthenticationFilter::class.java)
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
