@@ -13,18 +13,10 @@ import ru.kemsu.openenv.dto.OrganisationDTO
 import ru.kemsu.openenv.model.GeoCoord
 import ru.kemsu.openenv.service.GeoCoordService
 import ru.kemsu.openenv.service.OrganisationService
-import javax.servlet.http.HttpServletResponse
 
 @RestController
 @RequestMapping("/api/v1/admin")
 class AdminController @Autowired constructor(private val service: OrganisationService, private val geoservice: GeoCoordService, private val converterFacade: ConverterFacade) {
-    @RequestMapping(method = [RequestMethod.OPTIONS])
-    fun corsHeaders(response: HttpServletResponse) {
-        response.addHeader("Access-Control-Allow-Origin", "*")
-        response.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-        response.addHeader("Access-Control-Allow-Headers", "origin, content-type, accept, x-requested-with")
-        response.addHeader("Access-Control-Max-Age", "3600")
-    }
 
     @RequestMapping(method = [RequestMethod.PUT])
     fun createOrganisation(@RequestBody dto: OrganisationDTO?): ResponseEntity<*> {

@@ -7,27 +7,14 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RestController
-import ru.kemsu.openenv.dto.LoginDTO
 import ru.kemsu.openenv.dto.MessageDTO
 import ru.kemsu.openenv.dto.RoleDTO
-import ru.kemsu.openenv.dto.TokenDTO
-import ru.kemsu.openenv.security.service.TokenService
 import ru.kemsu.openenv.service.UserService
 
 
 @RestController
-class AuthenticationController @Autowired constructor(private val tokenService: TokenService, private val service: UserService) {
-    @RequestMapping(value = ["/api/auth"], method = [RequestMethod.POST])
-    fun authenticate(@RequestBody dto: LoginDTO): ResponseEntity<*> {
-        val token = tokenService.getToken(dto.username, dto.password)
-        return if (token != null) {
-            val response = TokenDTO()
-            response.token = token
-            ResponseEntity(response, HttpStatus.OK)
-        } else {
-            ResponseEntity("Authentication failed", HttpStatus.BAD_REQUEST)
-        }
-    }
+class AuthenticationController @Autowired constructor(
+        private val service: UserService) {
 
     @RequestMapping(value = ["/api/user/changeRole"], method = [RequestMethod.POST])
     fun changeRole(@RequestBody dto: RoleDTO): ResponseEntity<*> {

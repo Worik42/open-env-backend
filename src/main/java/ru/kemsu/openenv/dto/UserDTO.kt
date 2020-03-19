@@ -14,5 +14,8 @@ data class UserDTO(
         @JsonProperty("dateOfBirth")
         val dateOfBirth: String,
         @JsonProperty("password")
-        val password: String
+        val password: String,
+        @JsonProperty("phone")
+        val phone: String
+
 )

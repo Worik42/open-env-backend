@@ -7,7 +7,6 @@ import ru.kemsu.openenv.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 
 public class UserDTOConverter implements Converter<UserDTO, User> {
@@ -16,7 +15,7 @@ public class UserDTOConverter implements Converter<UserDTO, User> {
     public User convert(final UserDTO dto) {
         final User user = new User();
 
-        user.setUsername(UUID.randomUUID().toString());
+        user.setUsername(dto.getPhone());
         user.setDateOfBirth(dto.getDateOfBirth());
         user.setPassword(dto.getPassword());
         user.setFirstName(dto.getFirstName());

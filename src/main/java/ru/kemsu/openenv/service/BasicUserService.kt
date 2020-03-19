@@ -1,6 +1,11 @@
 package ru.kemsu.openenv.service
 
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.security.core.GrantedAuthority
+import org.springframework.security.core.authority.SimpleGrantedAuthority
+import org.springframework.security.core.userdetails.UserDetails
+import org.springframework.security.core.userdetails.UserDetailsService
+import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder
 import org.springframework.stereotype.Service
 import ru.kemsu.openenv.exception.model.UserAlreadyCreatedException
@@ -11,7 +16,7 @@ import java.time.LocalDateTime
 import java.util.*
 
 @Service
-class BasicUserService @Autowired constructor(private val repository: UserRepository) : UserService {
+class BasicUserService @Autowired constructor(private val repository: UserRepository) : UserService, UserDetailsService {
 
 //    @Bean
 //    fun encoder(): Pbkdf2PasswordEncoder {
@@ -66,6 +71,22 @@ class BasicUserService @Autowired constructor(private val repository: UserReposi
             user
         } else {
             null
+        }
+    }
+
+    override fun loadUserByUsername(username: String?): UserDetails {
+        val dbUser: User = this.repository.findByUsername(username)
+
+        return if (dbUser != null) {
+            val grantedAuthorities: MutableCollection<GrantedAuthority> = ArrayList()
+            for (role in dbUser.authorities) {
+                val authority: GrantedAuthority = SimpleGrantedAuthority(role.authority)
+                grantedAuthorities.add(authority)
+            }
+            org.springframework.security.core.userdetails.User(
+                    dbUser.username, dbUser.password, grantedAuthorities)
+        } else {
+            throw UsernameNotFoundException(String.format("User '%s' not found", username))
         }
     }
 
