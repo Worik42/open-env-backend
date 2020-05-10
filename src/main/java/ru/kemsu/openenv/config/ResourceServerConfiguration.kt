@@ -47,7 +47,7 @@ class ResourceServerConfiguration : ResourceServerConfigurerAdapter() {
         http.anonymous().and()
                 .authorizeRequests()
                 .antMatchers("/api/v1/signup").permitAll()
-                .antMatchers("/v2/api-docs").permitAll().and().authorizeRequests()
+                .antMatchers("/v2/api-docs").permitAll()
                 .antMatchers("/api/v1/admin").hasAuthority(Authority.ROLE_ADMIN.authority).anyRequest().authenticated()
                 .and().exceptionHandling().accessDeniedHandler(OAuth2AccessDeniedHandler())
     }

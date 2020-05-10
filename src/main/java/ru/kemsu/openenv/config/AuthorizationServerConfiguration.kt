@@ -12,10 +12,13 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices
+import org.springframework.security.oauth2.provider.token.TokenEnhancer
 import org.springframework.security.oauth2.provider.token.TokenStore
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore
+import ru.kemsu.openenv.security.CustomTokenEnhancer
 import ru.kemsu.openenv.service.BasicUserService
+
 
 @Configuration
 @EnableAuthorizationServer
@@ -27,9 +30,15 @@ class AuthorizationServerConfiguration : AuthorizationServerConfigurerAdapter() 
     @Autowired
     private val userDetailsService: BasicUserService? = null
 
+    @Bean
+    fun tokenEnhancer(): TokenEnhancer {
+        return CustomTokenEnhancer()
+    }
+
     @Throws(Exception::class)
     override fun configure(security: AuthorizationServerSecurityConfigurer) {
-        security.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()").allowFormAuthenticationForClients() //For authenticating client using the form parameters instead of basic auth
+        security
+                .allowFormAuthenticationForClients() //For authenticating client using the form parameters instead of basic auth
     }
 
     @Throws(Exception::class)
@@ -46,6 +55,7 @@ class AuthorizationServerConfiguration : AuthorizationServerConfigurerAdapter() 
     @Throws(Exception::class)
     override fun configure(endpoints: AuthorizationServerEndpointsConfigurer) {
         endpoints.tokenStore(tokenStore())
+                .tokenEnhancer(tokenEnhancer())
                 .authenticationManager(authenticationManager)
                 .userDetailsService(userDetailsService)
     }
@@ -68,6 +78,7 @@ class AuthorizationServerConfiguration : AuthorizationServerConfigurerAdapter() 
         val defaultTokenServices = DefaultTokenServices()
         defaultTokenServices.setTokenStore(tokenStore())
         defaultTokenServices.setSupportRefreshToken(true)
+        defaultTokenServices.setTokenEnhancer(tokenEnhancer())
         return defaultTokenServices
     }
 }

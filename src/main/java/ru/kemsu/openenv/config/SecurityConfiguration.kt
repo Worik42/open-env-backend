@@ -13,7 +13,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.oauth2.provider.token.TokenStore
-import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore
 import org.springframework.web.cors.CorsConfiguration
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 import org.springframework.web.filter.CorsFilter
@@ -23,10 +24,23 @@ import ru.kemsu.openenv.service.BasicUserService
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 class SecurityConfiguration : WebSecurityConfigurerAdapter() {
+//    @Autowired
+//    fun tokenStore(): TokenStore {
+//        return InMemoryTokenStore()
+//    }
+
     @Autowired
     fun tokenStore(): TokenStore {
-        return InMemoryTokenStore()
+        return JwtTokenStore(accessTokenConverter())
     }
+
+    @Autowired
+    fun accessTokenConverter(): JwtAccessTokenConverter {
+        val converter = JwtAccessTokenConverter()
+        converter.setSigningKey("worik-openevn")
+        return converter
+    }
+
 
     @Autowired
     private val userDetailsService: BasicUserService? = null
