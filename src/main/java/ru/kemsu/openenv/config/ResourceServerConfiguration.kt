@@ -44,10 +44,10 @@ class ResourceServerConfiguration : ResourceServerConfigurerAdapter() {
 
     @Throws(Exception::class)
     override fun configure(http: HttpSecurity) {
-        http.anonymous().disable()
+        http.anonymous().and()
                 .authorizeRequests()
                 .antMatchers("/api/v1/signup").permitAll()
-                .antMatchers("/v2/api-docs").permitAll()
+                .antMatchers("/v2/api-docs").permitAll().and().authorizeRequests()
                 .antMatchers("/api/v1/admin").hasAuthority(Authority.ROLE_ADMIN.authority).anyRequest().authenticated()
                 .and().exceptionHandling().accessDeniedHandler(OAuth2AccessDeniedHandler())
     }
