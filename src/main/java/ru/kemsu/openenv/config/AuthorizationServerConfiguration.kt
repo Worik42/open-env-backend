@@ -37,8 +37,9 @@ class AuthorizationServerConfiguration : AuthorizationServerConfigurerAdapter() 
 
     @Throws(Exception::class)
     override fun configure(security: AuthorizationServerSecurityConfigurer) {
-        security.tokenKeyAccess("permitAll()")
-                .checkTokenAccess("isAuthenticated()")
+        security
+//                .tokenKeyAccess("permitAll()")
+//                .checkTokenAccess("isAuthenticated()")
                 .allowFormAuthenticationForClients() //For authenticating client using the form parameters instead of basic auth
     }
 
@@ -70,7 +71,7 @@ class AuthorizationServerConfiguration : AuthorizationServerConfigurerAdapter() 
     @Bean
     fun accessTokenConverter(): JwtAccessTokenConverter {
         val converter = JwtAccessTokenConverter()
-        converter.setSigningKey("openenv42")
+        converter.setSigningKey("openenv-client")
         return converter
     }
 

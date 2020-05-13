@@ -20,4 +20,6 @@ public interface UserService {
     String delete(String id);
 
     User changeRole(String name, boolean isAdmin);
+
+    boolean changePassword(String username, String newPassword);
 }

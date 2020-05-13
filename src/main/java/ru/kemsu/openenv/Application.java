@@ -29,7 +29,7 @@ public class Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        if (this.userRepository.findByUsername("891234566645") == null) {
+        if (this.userRepository.findByUsername("891234566646") == null) {
             List<Authority> authorities = new ArrayList<>();
             authorities.add(Authority.ROLE_ADMIN);
             User user = new User();
@@ -38,7 +38,7 @@ public class Application implements CommandLineRunner {
             user.setFirstName("Nikolay");
             user.setPassword(passwordEncoder.encode("worik"));
             user.setDateOfBirth("20021998");
-            user.setUsername("891234566645");
+            user.setUsername("891234566646");
             user.setLastName("vorobev");
             user.setPatronymic("das");
             user.setAccountNonExpired(false);

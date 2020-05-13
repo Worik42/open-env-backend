@@ -6,7 +6,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException
-import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 import ru.kemsu.openenv.exception.model.UserAlreadyCreatedException
 import ru.kemsu.openenv.model.Authority
@@ -18,19 +18,18 @@ import java.util.*
 @Service
 class BasicUserService @Autowired constructor(private val repository: UserRepository) : UserService, UserDetailsService {
 
-//    @Bean
-//    fun encoder(): Pbkdf2PasswordEncoder {
-//        return Pbkdf2PasswordEncoder()
-//    }
+    @Autowired
+    fun encoder(): BCryptPasswordEncoder {
+        return BCryptPasswordEncoder()
+    }
 
     override fun create(user: User): User {
-        val encoder = Pbkdf2PasswordEncoder()
         val _user = repository.findByUsername(user.username)
         return if (_user != null) {
             throw UserAlreadyCreatedException("Пользователь уже существует")
         } else {
             user.createdAt = LocalDateTime.now().toString()
-            user.password = encoder.encode(user.password)
+            user.password = encoder().encode(user.password)
             repository.save(user)
         }
     }
@@ -54,6 +53,17 @@ class BasicUserService @Autowired constructor(private val repository: UserReposi
         user.updatedAt = LocalDateTime.now().toString()
         repository.save(user)
         return user
+    }
+
+    override fun changePassword(username: String, newPassword: String): Boolean {
+        val user = findByUsername(username)
+        if (user != null) {
+            val user_ = user
+            user_.password = encoder().encode(newPassword)
+            repository.save(user_)
+            return true
+        }
+        return false
     }
 
     override fun delete(id: String): String {

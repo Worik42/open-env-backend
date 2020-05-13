@@ -38,7 +38,7 @@ class SecurityConfiguration : WebSecurityConfigurerAdapter() {
     @Autowired
     fun accessTokenConverter(): JwtAccessTokenConverter {
         val converter = JwtAccessTokenConverter()
-        converter.setSigningKey("worik-openevn")
+        converter.setSigningKey("openenv-client")
         return converter
     }
 

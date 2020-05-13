@@ -25,7 +25,7 @@ class ResourceServerConfiguration : ResourceServerConfigurerAdapter() {
     @Autowired
     fun accessTokenConverter(): JwtAccessTokenConverter {
         val converter = JwtAccessTokenConverter()
-        converter.setSigningKey("123")
+        converter.setSigningKey("openenv-client")
         return converter
     }
 
