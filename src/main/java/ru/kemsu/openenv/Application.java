@@ -12,7 +12,6 @@ import ru.kemsu.openenv.repository.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 
 @SpringBootApplication
@@ -30,7 +29,7 @@ public class Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        if (this.userRepository.findByUsername("03e64987-6583-4570-8a47-e8c3e6ecb885") == null) {
+        if (this.userRepository.findByUsername("891234566645") == null) {
             List<Authority> authorities = new ArrayList<>();
             authorities.add(Authority.ROLE_ADMIN);
             User user = new User();
@@ -39,7 +38,7 @@ public class Application implements CommandLineRunner {
             user.setFirstName("Nikolay");
             user.setPassword(passwordEncoder.encode("worik"));
             user.setDateOfBirth("20021998");
-            user.setUsername(UUID.randomUUID().toString());
+            user.setUsername("891234566645");
             user.setLastName("vorobev");
             user.setPatronymic("das");
             user.setAccountNonExpired(false);
