@@ -37,7 +37,8 @@ class AuthorizationServerConfiguration : AuthorizationServerConfigurerAdapter() 
 
     @Throws(Exception::class)
     override fun configure(security: AuthorizationServerSecurityConfigurer) {
-        security
+        security.tokenKeyAccess("permitAll()")
+                .checkTokenAccess("isAuthenticated()")
                 .allowFormAuthenticationForClients() //For authenticating client using the form parameters instead of basic auth
     }
 
@@ -55,7 +56,8 @@ class AuthorizationServerConfiguration : AuthorizationServerConfigurerAdapter() 
     @Throws(Exception::class)
     override fun configure(endpoints: AuthorizationServerEndpointsConfigurer) {
         endpoints.tokenStore(tokenStore())
-                .tokenEnhancer(tokenEnhancer())
+//                .tokenEnhancer(tokenEnhancer())
+                .accessTokenConverter(accessTokenConverter())
                 .authenticationManager(authenticationManager)
                 .userDetailsService(userDetailsService)
     }
@@ -78,7 +80,7 @@ class AuthorizationServerConfiguration : AuthorizationServerConfigurerAdapter() 
         val defaultTokenServices = DefaultTokenServices()
         defaultTokenServices.setTokenStore(tokenStore())
         defaultTokenServices.setSupportRefreshToken(true)
-        defaultTokenServices.setTokenEnhancer(tokenEnhancer())
+//        defaultTokenServices.setTokenEnhancer(tokenEnhancer())
         return defaultTokenServices
     }
 }

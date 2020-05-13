@@ -4,11 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.web.servlet.FilterRegistrationBean
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.core.annotation.Order
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -21,8 +20,9 @@ import org.springframework.web.filter.CorsFilter
 import ru.kemsu.openenv.service.BasicUserService
 
 @Configuration
-@EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@Order(1)
+//@EnableWebSecurity
+//@EnableGlobalMethodSecurity(prePostEnabled = true)
 class SecurityConfiguration : WebSecurityConfigurerAdapter() {
 //    @Autowired
 //    fun tokenStore(): TokenStore {
@@ -52,6 +52,14 @@ class SecurityConfiguration : WebSecurityConfigurerAdapter() {
                 .passwordEncoder(passwordEncoder())
     }
 
+    @Throws(java.lang.Exception::class)
+    override fun configure(auth: AuthenticationManagerBuilder) { // @formatter:off
+        auth.inMemoryAuthentication()
+                .withUser("john")
+                .password(passwordEncoder().encode("123"))
+                .roles("USER")
+    } // @
+
     @Throws(Exception::class)
     override fun configure(http: HttpSecurity) {
         http
@@ -59,6 +67,13 @@ class SecurityConfiguration : WebSecurityConfigurerAdapter() {
                 .anonymous().disable()
                 .authorizeRequests()
                 .antMatchers("/v2/api-docs/**").permitAll()
+//        http.requestMatchers()
+//                .antMatchers("/login", "/oauth/authorize")
+//                .and()
+//                .authorizeRequests()
+//                .anyRequest()
+//                .authenticated()
+//                .and().csrf().disable();
     }
 
     @Bean
