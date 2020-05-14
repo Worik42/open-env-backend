@@ -17,6 +17,7 @@ import ru.kemsu.openenv.service.UserService
 
 @RestController
 class UserController @Autowired constructor(private val service: UserService) {
+
     @RequestMapping(value = ["/api/user/reset"], method = [RequestMethod.POST])
     fun resetPwd(@RequestBody dto: ResetDTO): ResponseEntity<*> {
         val authentication: Authentication = SecurityContextHolder.getContext().authentication
@@ -34,7 +35,7 @@ class UserController @Autowired constructor(private val service: UserService) {
     }
 
     @RequestMapping(value = ["/api/user"], method = [RequestMethod.POST])
-    fun getUserInformation(@RequestBody userChange: UserChangeDTO): ResponseEntity<*> {
+    fun updateUser(@RequestBody userChange: UserChangeDTO): ResponseEntity<*> {
         val authentication: Authentication = SecurityContextHolder.getContext().authentication
         val currentPrincipalName: String = authentication.name
         val result = service.updateUser(currentPrincipalName, userChange)
