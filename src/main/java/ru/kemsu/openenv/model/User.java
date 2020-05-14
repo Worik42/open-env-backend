@@ -18,10 +18,37 @@ public class User extends BaseEntity implements UserDetails {
     private String dateOfBirth;
     private String password;
     private String username;
+    private String email;
+    private String about;
+    private String diagnosis;
     private boolean accountNonExpired;
     private boolean accountNonLocked;
     private boolean credentialsNonExpired;
     private boolean isEnabled;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getAbout() {
+        return about;
+    }
+
+    public void setAbout(String about) {
+        this.about = about;
+    }
+
+    public String getDiagnosis() {
+        return diagnosis;
+    }
+
+    public void setDiagnosis(String diagnosis) {
+        this.diagnosis = diagnosis;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

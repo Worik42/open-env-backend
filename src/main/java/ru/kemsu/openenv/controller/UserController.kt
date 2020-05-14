@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RestController
 import ru.kemsu.openenv.dto.MessageDTO
 import ru.kemsu.openenv.dto.ResetDTO
+import ru.kemsu.openenv.dto.UserChangeDTO
 import ru.kemsu.openenv.service.UserService
 
 
@@ -23,5 +24,22 @@ class UserController @Autowired constructor(private val service: UserService) {
         val result = service.changePassword(currentPrincipalName, dto.newPassword)
         return ResponseEntity(MessageDTO(result.toString()), HttpStatus.OK)
     }
+
+    @RequestMapping(value = ["/api/user"], method = [RequestMethod.GET])
+    fun getUserInformation(): ResponseEntity<*> {
+        val authentication: Authentication = SecurityContextHolder.getContext().authentication
+        val currentPrincipalName: String = authentication.name
+        val result = service.findByUsername(currentPrincipalName)
+        return ResponseEntity(result, HttpStatus.OK)
+    }
+
+    @RequestMapping(value = ["/api/user"], method = [RequestMethod.POST])
+    fun getUserInformation(@RequestBody userChange: UserChangeDTO): ResponseEntity<*> {
+        val authentication: Authentication = SecurityContextHolder.getContext().authentication
+        val currentPrincipalName: String = authentication.name
+        val result = service.updateUser(currentPrincipalName, userChange)
+        return ResponseEntity(result, HttpStatus.OK)
+    }
+
 
 }

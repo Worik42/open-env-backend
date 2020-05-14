@@ -1,5 +1,6 @@
 package ru.kemsu.openenv.service;
 
+import ru.kemsu.openenv.dto.UserChangeDTO;
 import ru.kemsu.openenv.model.User;
 
 import java.util.List;
@@ -22,4 +23,6 @@ public interface UserService {
     User changeRole(String name, boolean isAdmin);
 
     boolean changePassword(String username, String newPassword);
+
+    boolean updateUser(String name, UserChangeDTO userChange);
 }

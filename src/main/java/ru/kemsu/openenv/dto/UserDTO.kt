@@ -32,6 +32,7 @@ data class UserDTO(
 
         @JsonProperty("password")
         val password: String,
+
         @JsonProperty("phone")
         val phone: String
 

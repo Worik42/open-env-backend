@@ -15,7 +15,8 @@ public class UserDTOConverter implements Converter<UserDTO, User> {
     public User convert(final UserDTO dto) {
         final User user = new User();
 
-        user.setUsername(dto.getPhone());
+        user.setUsername(dto.getUsername());
+        user.setEmail(dto.getUsername());
         user.setDateOfBirth(dto.getDateOfBirth());
         user.setPassword(dto.getPassword());
         user.setFirstName(dto.getFirstName());

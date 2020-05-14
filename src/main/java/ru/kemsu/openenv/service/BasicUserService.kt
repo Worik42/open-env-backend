@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
+import ru.kemsu.openenv.dto.UserChangeDTO
 import ru.kemsu.openenv.exception.model.UserAlreadyCreatedException
 import ru.kemsu.openenv.model.Authority
 import ru.kemsu.openenv.model.User
@@ -82,6 +83,19 @@ class BasicUserService @Autowired constructor(private val repository: UserReposi
         } else {
             null
         }
+    }
+
+    override fun updateUser(name: String, userChange: UserChangeDTO): Boolean {
+        val user = repository.findByUsername(name)
+        if (user != null) {
+            val user_ = user
+            user_.about = userChange.about
+            user_.email = userChange.email
+            user.diagnosis = userChange.diagnosis
+            repository.save(user_)
+            return true
+        }
+        return false
     }
 
     override fun loadUserByUsername(username: String?): UserDetails {
