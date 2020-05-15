@@ -37,10 +37,7 @@ class AuthorizationServerConfiguration : AuthorizationServerConfigurerAdapter() 
 
     @Throws(Exception::class)
     override fun configure(security: AuthorizationServerSecurityConfigurer) {
-        security
-//                .tokenKeyAccess("permitAll()")
-//                .checkTokenAccess("isAuthenticated()")
-                .allowFormAuthenticationForClients() //For authenticating client using the form parameters instead of basic auth
+        security.allowFormAuthenticationForClients() //For authenticating client using the form parameters instead of basic auth
     }
 
     @Throws(Exception::class)
@@ -57,7 +54,6 @@ class AuthorizationServerConfiguration : AuthorizationServerConfigurerAdapter() 
     @Throws(Exception::class)
     override fun configure(endpoints: AuthorizationServerEndpointsConfigurer) {
         endpoints.tokenStore(tokenStore())
-//                .tokenEnhancer(tokenEnhancer())
                 .accessTokenConverter(accessTokenConverter())
                 .authenticationManager(authenticationManager)
                 .userDetailsService(userDetailsService)
