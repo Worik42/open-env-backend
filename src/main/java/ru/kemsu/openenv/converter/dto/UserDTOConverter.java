@@ -1,6 +1,7 @@
 package ru.kemsu.openenv.converter.dto;
 
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.security.core.GrantedAuthority;
 import ru.kemsu.openenv.dto.UserDTO;
 import ru.kemsu.openenv.model.Authority;
 import ru.kemsu.openenv.model.User;
@@ -26,7 +27,7 @@ public class UserDTOConverter implements Converter<UserDTO, User> {
         user.setCredentialsNonExpired(false);
         user.setEnabled(true);
 
-        List<Authority> authorities = new ArrayList<>();
+        List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(Authority.ROLE_USER);
         user.setAuthorities(authorities);
         return user;

@@ -11,7 +11,7 @@ public class User extends BaseEntity implements UserDetails {
 
     private static final long serialVersionUID = 7954325925563724664L;
 
-    private List<Authority> authorities;
+    private List<GrantedAuthority> authorities;
     private String firstName;
     private String lastName;
     private String patronymic;
@@ -122,7 +122,7 @@ public class User extends BaseEntity implements UserDetails {
         return isEnabled;
     }
 
-    public void setAuthorities(final List<Authority> authorities) {
+    public void setAuthorities(final List<GrantedAuthority> authorities) {
         this.authorities = authorities;
     }
 

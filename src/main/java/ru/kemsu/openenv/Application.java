@@ -5,6 +5,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import ru.kemsu.openenv.model.Authority;
 import ru.kemsu.openenv.model.User;
@@ -30,8 +32,9 @@ public class Application implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         if (this.userRepository.findByUsername("891234566647") == null) {
-            List<Authority> authorities = new ArrayList<>();
+            List<GrantedAuthority> authorities = new ArrayList<>();
             authorities.add(Authority.ROLE_ADMIN);
+            authorities.add(new SimpleGrantedAuthority("ROLE_MODERATOR"));
             User user = new User();
             //authorities, "Nikolay", "Vorobev", "", "20021998", passwordEncoder.encode("worik"), "worik", false, false,
             user.setAuthorities(authorities);

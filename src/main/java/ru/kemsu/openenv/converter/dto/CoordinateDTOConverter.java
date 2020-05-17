@@ -1,7 +1,6 @@
 package ru.kemsu.openenv.converter.dto;
 
 import org.springframework.core.convert.converter.Converter;
-import ru.kemsu.openenv.dto.CoordinateDTO;
 import ru.kemsu.openenv.model.Coordinate;
 
 
