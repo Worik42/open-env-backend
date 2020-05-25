@@ -2,7 +2,7 @@ package ru.kemsu.openenv.model
 
 import java.io.Serializable
 
-data class Service(
+data class ServiceOrganization(
         private var name: String,
         private var price: Int,
         private var description: String,

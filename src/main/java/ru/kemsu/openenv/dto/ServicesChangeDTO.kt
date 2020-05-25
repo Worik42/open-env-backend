@@ -7,8 +7,8 @@ import javax.validation.constraints.NotNull
 @Serializable
 data class ServicesChangeDTO(
         @field:NotNull
-        @JsonProperty("id_organization")
-        val idOrganisation: String,
+        @JsonProperty("id_service")
+        val idService: String,
 
         @field:NotNull
         @JsonProperty("name")

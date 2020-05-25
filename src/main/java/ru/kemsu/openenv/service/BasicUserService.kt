@@ -75,7 +75,7 @@ class BasicUserService @Autowired constructor(private val repository: UserReposi
     override fun changeRole(name: String, isAdmin: Boolean): User? {
         val user = repository.findByUsername(name)
         return if (user != null) {
-            val authorities: MutableList<GrantedAuthority> = ArrayList()
+            val authorities: MutableList<Authority> = ArrayList()
             if (isAdmin) authorities.add(Authority.ROLE_ADMIN) else authorities.add(Authority.ROLE_USER)
             user.setAuthorities(authorities)
             repository.save(user)

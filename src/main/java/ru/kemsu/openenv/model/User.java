@@ -1,6 +1,5 @@
 package ru.kemsu.openenv.model;
 
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
@@ -11,7 +10,7 @@ public class User extends BaseEntity implements UserDetails {
 
     private static final long serialVersionUID = 7954325925563724664L;
 
-    private List<GrantedAuthority> authorities;
+    private List<Authority> authorities;
     private String firstName;
     private String lastName;
     private String patronymic;
@@ -51,7 +50,7 @@ public class User extends BaseEntity implements UserDetails {
     }
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
+    public Collection<? extends Authority> getAuthorities() {
         return authorities;
     }
 
@@ -122,7 +121,7 @@ public class User extends BaseEntity implements UserDetails {
         return isEnabled;
     }
 
-    public void setAuthorities(final List<GrantedAuthority> authorities) {
+    public void setAuthorities(final List<Authority> authorities) {
         this.authorities = authorities;
     }
 
