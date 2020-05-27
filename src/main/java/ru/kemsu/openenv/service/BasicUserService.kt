@@ -1,5 +1,10 @@
 package ru.kemsu.openenv.service
 
+import org.passay.AllowedCharacterRule.ERROR_CODE
+import org.passay.CharacterData
+import org.passay.CharacterRule
+import org.passay.EnglishCharacterData
+import org.passay.PasswordGenerator
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
@@ -56,15 +61,16 @@ class BasicUserService @Autowired constructor(private val repository: UserReposi
         return user
     }
 
-    override fun changePassword(username: String, newPassword: String): Boolean {
+    override fun resetPassword(username: String): String? {
         val user = findByUsername(username)
         if (user != null) {
             val user_ = user
-            user_.password = encoder().encode(newPassword)
+            val newPass = generatePassayPassword()
+            user_.password = encoder().encode(newPass)
             repository.save(user_)
-            return true
+            return newPass
         }
-        return false
+        return null
     }
 
     override fun delete(id: String): String {
@@ -99,7 +105,7 @@ class BasicUserService @Autowired constructor(private val repository: UserReposi
     }
 
     override fun loadUserByUsername(username: String?): UserDetails {
-        val dbUser: User = this.repository.findByUsername(username)
+        val dbUser: User = repository.findByUsername(username)
 
         return if (dbUser != null) {
             val grantedAuthorities: MutableCollection<GrantedAuthority> = ArrayList()
@@ -114,4 +120,30 @@ class BasicUserService @Autowired constructor(private val repository: UserReposi
         }
     }
 
+    fun generatePassayPassword(): String {
+        val gen = PasswordGenerator()
+        val lowerCaseChars: CharacterData = EnglishCharacterData.LowerCase
+        val lowerCaseRule = CharacterRule(lowerCaseChars)
+        lowerCaseRule.numberOfCharacters = 2
+        val upperCaseChars: CharacterData = EnglishCharacterData.UpperCase
+        val upperCaseRule = CharacterRule(upperCaseChars)
+        upperCaseRule.numberOfCharacters = 2
+        val digitChars: CharacterData = EnglishCharacterData.Digit
+        val digitRule = CharacterRule(digitChars)
+        digitRule.numberOfCharacters = 2
+        val specialChars: CharacterData = object : CharacterData {
+
+            override fun getErrorCode(): String {
+                return ERROR_CODE
+            }
+
+            override fun getCharacters(): String {
+                return "!@#$%^&*()_+"
+            }
+        }
+        val splCharRule = CharacterRule(specialChars)
+        splCharRule.numberOfCharacters = 2
+        return gen.generatePassword(10, splCharRule, lowerCaseRule,
+                upperCaseRule, digitRule)
+    }
 }

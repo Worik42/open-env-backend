@@ -22,7 +22,7 @@ public interface UserService {
 
     User changeRole(String name, boolean isAdmin);
 
-    boolean changePassword(String username, String newPassword);
+    String resetPassword(String username);
 
     boolean updateUser(String name, UserChangeDTO userChange);
 }

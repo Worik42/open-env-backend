@@ -35,7 +35,7 @@ data class OrganizationDTO(
         val timeStart: Int,
 
         @field:NotNull
-        @JsonProperty("time_start")
+        @JsonProperty("time_end")
         val timeEnd: Int,
 
         @field:NotNull

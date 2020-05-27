@@ -35,9 +35,8 @@ class OrganizationController @Autowired constructor(private val service: Organiz
     }
 
     @RequestMapping(method = [RequestMethod.GET])
-    fun getOrganization(): ResponseEntity<*> {
-        val orgs = service.findAll()
-        return ResponseEntity(orgs, HttpStatus.OK)
+    fun getOrganization(): ResponseEntity<List<Organization>> {
+        return ResponseEntity(service.findAll(), HttpStatus.OK)
     }
 
 }

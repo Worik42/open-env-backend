@@ -3,13 +3,13 @@ package ru.kemsu.openenv.model
 import java.io.Serializable
 
 data class Organization(
-        private var name: String,
-        private var typeServices: String,
-        private var description: String,
-        private var address: String,
-        private var phone: String,
-        private var site: String,
-        private var timeStart: Int,
-        private var timeEnd: Int,
-        private var isWorkWeekend: Boolean
+        var name: String,
+        var typeServices: String,
+        var description: String,
+        var address: String,
+        var phone: String,
+        var site: String,
+        var timeStart: Int,
+        var timeEnd: Int,
+        var isWorkWeekend: Boolean
 ) : BaseEntity(), Serializable
