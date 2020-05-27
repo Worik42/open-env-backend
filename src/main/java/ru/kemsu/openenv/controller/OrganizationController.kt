@@ -22,21 +22,28 @@ class OrganizationController @Autowired constructor(private val service: Organiz
     }
 
     @RequestMapping(value = ["/{org_id}"], method = [RequestMethod.DELETE])
-    fun deleteOrganisation(@PathVariable org_id: String): ResponseEntity<*> {
+    fun deleteOrganization(@PathVariable org_id: String): ResponseEntity<*> {
         val temp = service.find(org_id)
         service.delete(temp.id)
         return ResponseEntity(MessageDTO("Success"), HttpStatus.OK)
     }
 
     @RequestMapping(method = [RequestMethod.POST])
-    fun changeOrganisation(@RequestBody dto: OrganizationChangeDTO): ResponseEntity<*> {
+    fun changeOrganization(@RequestBody dto: OrganizationChangeDTO): ResponseEntity<*> {
         val ret = service.update(dto)
         return ResponseEntity(ret, HttpStatus.OK)
     }
 
     @RequestMapping(method = [RequestMethod.GET])
-    fun getOrganization(): ResponseEntity<List<Organization>> {
+    fun getOrganizations(): ResponseEntity<List<Organization>> {
         return ResponseEntity(service.findAll(), HttpStatus.OK)
     }
+
+    @RequestMapping(value = ["/{org_id}"], method = [RequestMethod.GET])
+    fun getOrganization(@PathVariable org_id: String): ResponseEntity<*> {
+        val temp = service.find(org_id)
+        return ResponseEntity(temp, HttpStatus.OK)
+    }
+
 
 }
