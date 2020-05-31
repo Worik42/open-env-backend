@@ -25,7 +25,7 @@ public class UserDTOConverter implements Converter<UserDTO, User> {
         user.setAccountNonExpired(false);
         user.setCredentialsNonExpired(false);
         user.setEnabled(true);
-
+        user.setModerator(false);
         List<Authority> authorities = new ArrayList<>();
         authorities.add(Authority.ROLE_USER);
         user.setAuthorities(authorities);
