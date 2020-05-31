@@ -5,7 +5,7 @@ import ru.kemsu.openenv.dto.ServicesDTO
 import ru.kemsu.openenv.model.ServiceOrganization
 
 interface ServiceService {
-    fun create(dto: ServicesDTO, id: String): ServiceOrganization
+    fun create(dto: ServicesDTO): ServiceOrganization
 
     fun find(id: String): ServiceOrganization
 
@@ -14,4 +14,6 @@ interface ServiceService {
     fun update(service: ServicesChangeDTO)
 
     fun delete(id: String): Boolean
+
+    fun findByIdOrganization(id: String): List<ServiceOrganization>
 }

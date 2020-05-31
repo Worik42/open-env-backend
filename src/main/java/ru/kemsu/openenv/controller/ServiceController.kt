@@ -14,9 +14,9 @@ import ru.kemsu.openenv.service.ServiceService
 @RestController
 @RequestMapping("/api/services")
 class ServiceController @Autowired constructor(private val service: ServiceService, private val serviceOrganization: OrganizationService) {
-    @RequestMapping(value = ["/{id}"], method = [RequestMethod.PUT])
-    fun createService(@RequestBody dto: ServicesDTO, @PathVariable id: String): ResponseEntity<*> {
-        val serv = service.create(dto, id)
+    @RequestMapping(method = [RequestMethod.PUT])
+    fun createService(@RequestBody dto: ServicesDTO): ResponseEntity<*> {
+        val serv = service.create(dto)
         return ResponseEntity(MessageDTO("OK"), HttpStatus.OK)
     }
 
@@ -32,11 +32,23 @@ class ServiceController @Autowired constructor(private val service: ServiceServi
         return ResponseEntity(MessageDTO("OK"), HttpStatus.OK)
     }
 
-    @RequestMapping(value = ["/{id_organization}"], method = [RequestMethod.GET])
-    fun getServices(@PathVariable id_organization: String): ResponseEntity<*> {
-        serviceOrganization.find(id_organization)
-        return ResponseEntity(MessageDTO("OK"), HttpStatus.OK)
+    @RequestMapping(method = [RequestMethod.GET])
+    fun getServices(): ResponseEntity<*> {
+        return ResponseEntity(serviceOrganization.findAll(), HttpStatus.OK)
     }
 
+    @RequestMapping(value = ["/{id_organization}"], method = [RequestMethod.GET])
+    fun getServicesByIdOrganization(@PathVariable id_organization: String): ResponseEntity<*> {
+        return ResponseEntity(service.findByIdOrganization(id_organization), HttpStatus.OK)
+    }
 
+    /**
+     * todo:// Сделать методы , поидее надо сделать метод услуги на короторую записался пользователь
+     * /api/services/subscribe - Метод записи на услугу
+     * /api/services/claims - Метод изменения статуса заявки пользователя
+     */
+    @RequestMapping(value = ["/{id_service}"], method = [RequestMethod.GET])
+    fun subscribe(@PathVariable id_service: String): ResponseEntity<*> {
+        return ResponseEntity(service.findByIdOrganization(id_service), HttpStatus.OK)
+    }
 }

@@ -10,9 +10,9 @@ import ru.kemsu.openenv.repository.ServiceRepository
 
 @Service
 class BasicServiceService @Autowired constructor(private val repository: ServiceRepository) : ServiceService {
-    override fun create(dto: ServicesDTO, id: String): ServiceOrganization {
+    override fun create(dto: ServicesDTO): ServiceOrganization {
         val position = Position(dto.location.latitude, dto.location.longitude)
-        val service = ServiceOrganization(dto.name, dto.price, dto.description, position, dto.timeStart, dto.timeEnd, dto.isWorkWeekend)
+        val service = ServiceOrganization(dto.idOrganisation, dto.name, dto.price, dto.description, position, dto.timeStart, dto.timeEnd, dto.isWorkWeekend)
         return repository.save(service)
     }
 
@@ -34,6 +34,11 @@ class BasicServiceService @Autowired constructor(private val repository: Service
     override fun delete(id: String): Boolean {
         repository.deleteById(id)
         return true
+    }
+
+    override fun findByIdOrganization(id: String): List<ServiceOrganization> {
+        val services = repository.findByIdOrganization(id)
+        return services
     }
 
 
