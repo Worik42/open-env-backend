@@ -9,6 +9,7 @@ plugins {
     kotlin("jvm") version "1.3.61"
     kotlin("plugin.spring") version "1.3.61"
     kotlin("plugin.serialization") version "1.3.61"
+    application
 }
 
 repositories {
@@ -52,7 +53,12 @@ dependencies {
 group = "ru.kemsu.openenv"
 version = "0.0.1-SNAPSHOT"
 description = "OpenenvBackend"
+
 java.sourceCompatibility = JavaVersion.VERSION_1_8
+
+application {
+    mainClassName = "ru.kemsu.openenv.Application"
+}
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {

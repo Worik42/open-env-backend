@@ -21,4 +21,3 @@ class SignUpController @Autowired constructor(private val service: UserService,
     }
 
 }
-//"username": "46409409-2951-415d-b050-48e9962837aa"
