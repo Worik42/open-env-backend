@@ -34,8 +34,7 @@ class ServiceController @Autowired constructor(private val service: ServiceServi
 
     @RequestMapping(value = ["/{id_organization}"], method = [RequestMethod.GET])
     fun getServices(@PathVariable id_organization: String): ResponseEntity<*> {
-        serviceOrganization.find(id_organization)
-        return ResponseEntity(MessageDTO("OK"), HttpStatus.OK)
+        return ResponseEntity(service.findByIdOrg(id_organization), HttpStatus.OK)
     }
 
 

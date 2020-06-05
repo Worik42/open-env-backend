@@ -14,4 +14,6 @@ interface ServiceService {
     fun update(service: ServicesChangeDTO)
 
     fun delete(id: String): Boolean
+
+    fun findByIdOrg(idOrg: String): List<ServiceOrganization>
 }

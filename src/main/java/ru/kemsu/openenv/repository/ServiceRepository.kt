@@ -6,4 +6,7 @@ import ru.kemsu.openenv.model.ServiceOrganization
 
 @Repository
 interface ServiceRepository : MongoRepository<ServiceOrganization, String> {
+
+    fun findByIdOrganization(idOrganiztion: String): List<ServiceOrganization>
+
 }
