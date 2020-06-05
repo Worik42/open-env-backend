@@ -57,7 +57,7 @@ description = "OpenenvBackend"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 application {
-//    mainClassName = "ru.kemsu.openenv.Application"
+    mainClassName = "ru.kemsu.openenv.Application"
 }
 
 tasks.withType<KotlinCompile> {
