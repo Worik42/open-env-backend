@@ -9,14 +9,15 @@ import ru.kemsu.openenv.dto.OrganizationChangeDTO
 import ru.kemsu.openenv.dto.OrganizationDTO
 import ru.kemsu.openenv.model.Organization
 import ru.kemsu.openenv.service.OrganizationService
+import ru.kemsu.openenv.service.TypeServicesService
 
 @RestController
 @RequestMapping("/api/organizations")
-class OrganizationController @Autowired constructor(private val service: OrganizationService) {
+class OrganizationController @Autowired constructor(private val service: OrganizationService, private val serviceType: TypeServicesService) {
 
     @RequestMapping(method = [RequestMethod.PUT])
     fun createOrganization(@RequestBody dto: OrganizationDTO): ResponseEntity<*> {
-        val org = Organization(dto.name, dto.typeServices, dto.description, dto.address, dto.phone, dto.site, dto.timeStart, dto.timeEnd, dto.isWorkWeekend)
+        val org = Organization(dto.name, dto.idTypeServices, dto.description, dto.address, dto.phone, dto.site, dto.timeStart, dto.timeEnd, dto.isWorkWeekend)
         service.create(org)
         return ResponseEntity(org, HttpStatus.OK)
     }
@@ -45,5 +46,8 @@ class OrganizationController @Autowired constructor(private val service: Organiz
         return ResponseEntity(temp, HttpStatus.OK)
     }
 
-
+    @RequestMapping(value = ["/types/{id_type}"], method = [RequestMethod.GET])
+    fun getOrganizationByIdType(@PathVariable id_type: String): ResponseEntity<*> {
+        return ResponseEntity(service.findByIdType(id_type), HttpStatus.OK)
+    }
 }

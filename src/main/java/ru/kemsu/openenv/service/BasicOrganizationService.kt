@@ -26,6 +26,10 @@ class BasicOrganizationService @Autowired constructor(private val repository: Or
         return repository.findAll()
     }
 
+    override fun findByIdType(idType: String): MutableList<Organization> {
+        return repository.findByIdTypeServices(idType)
+    }
+
     override fun update(organization: OrganizationChangeDTO): Organization {
         val saved = repository.findById(organization.id).get()
         if (saved != null) {

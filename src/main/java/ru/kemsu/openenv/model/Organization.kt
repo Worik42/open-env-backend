@@ -4,7 +4,7 @@ import java.io.Serializable
 
 data class Organization(
         var name: String,
-        var typeServices: String,
+        var idTypeServices: String,
         var description: String,
         var address: String,
         var phone: String,

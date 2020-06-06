@@ -18,4 +18,6 @@ public interface OrganizationService {
     Organization update(OrganizationChangeDTO organization);
 
     String delete(String id);
+
+    List<Organization> findByIdType(String idType);
 }

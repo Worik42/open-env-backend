@@ -11,8 +11,8 @@ data class OrganizationDTO(
         val name: String,
 
         @field:NotNull
-        @JsonProperty("typeServices")
-        val typeServices: String,
+        @JsonProperty("id_typeServices")
+        val idTypeServices: String,
 
         @field:NotNull
         @JsonProperty("description")
