@@ -4,6 +4,6 @@ import java.io.Serializable
 
 
 data class Position(
-        private var latitude: Double,
-        private var longitude: Double
+        var latitude: Double,
+        var longitude: Double
 ) : BaseEntity(), Serializable
