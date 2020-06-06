@@ -47,7 +47,7 @@ class AuthorizationServerConfiguration : AuthorizationServerConfigurerAdapter() 
                 .secret(passwordEncoder!!.encode("secret"))
                 .authorizedGrantTypes("password", "client_credentials", "refresh_token")
                 .scopes("read", "write", "trust")
-                .accessTokenValiditySeconds(3600)
+                .accessTokenValiditySeconds(540000)
                 .refreshTokenValiditySeconds(86400)
     }
 
