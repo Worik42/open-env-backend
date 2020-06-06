@@ -38,4 +38,10 @@ class ServiceController @Autowired constructor(private val service: ServiceServi
     }
 
 
+    @RequestMapping(method = [RequestMethod.GET])
+    fun getAllServices(): ResponseEntity<*> {
+        return ResponseEntity(service.findAll(), HttpStatus.OK)
+    }
+
+
 }
