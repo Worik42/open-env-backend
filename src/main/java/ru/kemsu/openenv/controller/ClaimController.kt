@@ -20,8 +20,6 @@ class ClaimController {
     fun confirm(@PathVariable user_id: String): ResponseEntity<*> {
         return ResponseEntity(MessageDTO("OK"), HttpStatus.OK)
     }
-
-
 }
 /**
  * @startuml
