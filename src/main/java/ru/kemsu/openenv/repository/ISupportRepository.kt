@@ -8,3 +8,9 @@ import ru.kemsu.openenv.model.Support
 interface ISupportRepository : MongoRepository<Support, String> {
 
 }
+/**
+ * @startuml
+ * interface ISupportRepository {
+ * }
+ * @enduml
+ */

@@ -27,3 +27,12 @@ class TypeServicesController @Autowired constructor(private val service: TypeSer
         return ResponseEntity(service.create(ser), HttpStatus.OK)
     }
 }
+/**
+ * @startuml
+ * class TypeServicesController {
+ *  -val service: TypeServicesService
+ *  fun getAllTypes(): ResponseEntity<*>
+ *  fun createType(@RequestBody dto: TypeServiceDTO): ResponseEntity<*>
+ * }
+ * @enduml
+ */

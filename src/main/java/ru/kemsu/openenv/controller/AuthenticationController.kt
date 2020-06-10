@@ -23,3 +23,13 @@ class AuthenticationController @Autowired constructor(
     }
 
 }
+
+/**
+ * @startuml
+ *
+ * class AuthenticationController {
+ *    - val service: UserService
+ *    fun changeRole(dto: RoleDTO): ResponseEntity<*>
+ * }
+ * @enduml
+ */

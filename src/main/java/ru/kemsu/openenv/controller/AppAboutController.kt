@@ -17,3 +17,11 @@ class AppAboutController {
     }
 
 }
+/**
+ * @startuml
+ *
+ * class AppAboutController {
+ *     fun getInformation(): ResponseEntity<*>
+ * }
+ * @enduml
+ */

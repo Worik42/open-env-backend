@@ -21,3 +21,13 @@ class SignUpController @Autowired constructor(private val service: UserService,
     }
 
 }
+/**
+ * @startuml
+ *
+ * class SignUpController {
+ *  -val service: UserService
+ *  -val serviceOrganization: OrganizationService
+ *  fun signUp(@RequestBody dto: UserDTO?): ResponseEntity<*>
+ * }
+ * @enduml
+ */

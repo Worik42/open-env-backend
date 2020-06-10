@@ -1,0 +1,202 @@
+@startuml
+skinparam classAttributeIconSize 0
+class AuthorizationServerConfiguration implements AuthorizationServerConfigurerAdapter{
+ -  authenticationManager: AuthenticationManager
+ -  passwordEncoder: PasswordEncoder
+ -  userDetailsService: BasicUserService
+ fun tokenEnhancer(): TokenEnhancer
+ fun configure(security: AuthorizationServerSecurityConfigurer)
+  fun configure(clients: ClientDetailsServiceConfigurer)
+  fun configure(endpoints: AuthorizationServerEndpointsConfigurer)
+  fun tokenStore(): TokenStore
+  fun accessTokenConverter(): JwtAccessTokenConverter
+  fun tokenServices(): DefaultTokenServices
+  }
+
+AuthorizationServerConfiguration --|> Application
+class Application implements CommandLineRunner {
+ - userRepository: UserRepository
+ - passwordEncoder: PasswordEncoder
+ fun main(args: String[])
+ fun run(args: String)
+}
+
+ResourceServerConfiguration --|> AuthorizationServerConfiguration
+class ResourceServerConfiguration implements ResourceServerConfigurerAdapter {
+fun tokenStore(): TokenStore
+fun accessTokenConverter(): JwtAccessTokenConverter
+fun tokenServices(): DefaultTokenServices
+fun configure(resources: ResourceServerSecurityConfigurer)
+fun configure(http: HttpSecurity)
+}
+
+SecurityConfiguration --|> ResourceServerConfiguration
+class SecurityConfiguration implements WebSecurityConfigurerAdapter {
+fun tokenStore(): TokenStore
+fun accessTokenConverter(): JwtAccessTokenConverter
+- val userDetailsService: BasicUserService
+fun globalUserDetails(auth: AuthenticationManagerBuilder)
+fun configure(http: HttpSecurity)
+fun authenticationManagerBean(): AuthenticationManager
+fun passwordEncoder(): PasswordEncoder
+fun corsFilter(): FilterRegistrationBean<CorsFilter>
+}
+class AppAboutController {
+      fun getInformation(): ResponseEntity<>
+  }
+  class ClaimController {
+       - val service: ClaimService
+      fun createOrSubscibeClaim( claim: ClaimDTO): ResponseEntity<>
+      fun confirm( user_id: String): ResponseEntity<>
+   }
+
+   class OrganizationController {
+   -val service: OrganizationService
+     - val serviceType: TypeServicesService
+   fun createOrganization(@RequestBody dto: OrganizationDTO): ResponseEntity<>
+   fun deleteOrganization(@PathVariable org_id: String): ResponseEntity<>
+   fun changeOrganization(@RequestBody dto: OrganizationChangeDTO): ResponseEntity<>
+   fun getOrganizations(): ResponseEntity<List<Organization>>
+   fun getOrganization(@PathVariable org_id: String): ResponseEntity<>
+   fun getOrganizationByIdType(@PathVariable id_type: String): ResponseEntity<>
+  }
+
+class ServiceController {
+  -val service: ServiceService
+  -val serviceOrganization: OrganizationService
+  fun createService(@RequestBody dto: ServicesDTO, @PathVariable id: String): ResponseEntity<>
+  fun changeService(@RequestBody dto: ServicesChangeDTO): ResponseEntity<>
+  fun deleteService(@PathVariable id: String): ResponseEntity<>
+  fun getServices(@PathVariable id_organization: String): ResponseEntity<>
+  fun getAllServices(): ResponseEntity<>
+ }
+
+class SignUpController {
+  -val service: UserService
+  -val serviceOrganization: OrganizationService
+  fun signUp(@RequestBody dto: UserDTO?): ResponseEntity<>
+ }
+ class SupportController {
+  -val service: ISupportService
+  fun report(@RequestBody supp: SupportDTO): ResponseEntity<>
+ }
+ class TypeServicesController {
+  -val service: TypeServicesService
+  fun getAllTypes(): ResponseEntity<>
+  fun createType(@RequestBody dto: TypeServiceDTO): ResponseEntity<>
+ }
+class TypeServicesController {
+  - val service: UserService
+  - val emailSender: JavaMailSender
+  fun resetPwd(): ResponseEntity<>
+  fun getUserInformation(): ResponseEntity<>
+  fun updateUser(@RequestBody userChange: UserChangeDTO): ResponseEntity<>
+ }
+ class TypeServicesController {
+  - val service: UserService
+  - val emailSender: JavaMailSender
+  fun resetPwd(): ResponseEntity<>
+  fun getUserInformation(): ResponseEntity<>
+  fun updateUser(@RequestBody userChange: UserChangeDTO): ResponseEntity<>
+ }
+
+ interface ISupportRepository {
+   }
+ interface OrganisationRepository {
+   fun findByName(organisationName: String): Organization
+   fun findByIdTypeServices(idType: String): List<Organization>
+   }
+  interface ServiceRepository {
+    fun findByIdOrganization(idOrganiztion: String): List<ServiceOrganization>
+  }
+    interface TypeServicesRepository {
+   }
+  interface ServiceRepository {
+      fun findByUsername(userName: String): User
+  }
+   interface TypeServicesRepository {
+   }
+   interface ServiceRepository {
+         fun findByUsername(userName: String): User
+   }
+      interface ISupportService {
+         fun createSupport(support: Support): Support
+        }
+       interface OrganizationService {
+         fun create(org: Organization): Organization
+         fun find(id: String): Organization
+         fun findByName(organisationName: String): Organization
+         fun findAll(): List<Organization>
+             fun update(organization: OrganizationChangeDTO): Organization
+             fun delete(id: String): String
+             fun findByIdType(idType: String): List<Organization>
+         }
+        interface ServiceService {
+          fun create(dto: ServicesDTO, id: String): ServiceOrganization
+          fun find(id: String): ServiceOrganization
+          fun findAll(): List<ServiceOrganization>
+          fun update(service: ServicesChangeDTO)
+              fun delete(id: String): Boolean
+             fun findByIdOrg(idOrg: String): List<ServiceOrganization>
+          }
+         interface TypeServicesService {
+           fun getTypeById(idType: String): TypeServices
+           fun find(id: String): ServiceOrganization
+           fun findAll(): List<TypeServices>
+              fun create(type: TypeServices)
+           }
+          interface UserService {
+            fun create(user: User): User
+            fun find(id: String): User
+            fun findByUsername(userName: String): User
+            fun findAll(): List<User>
+                fun update(id: String, user: User): User
+          fun delete(id: String): String
+          fun changeRole(name: String, isAdmin: Boolean): User
+          fun resetPassword(username: String): String
+          fun updateUser(name: String, userChange: UserChangeDTO): Boolean
+
+            }
+class BasicOrganizationService implements OrganizationService {
+       - val repository: OrganisationRepository
+       fun create(organisation: Organization): Organization
+       fun find(id: String): Organization
+       fun findByName(organisationName: String): Organization
+       fun findAll(): List<Organization>
+           fun findByIdType(idType: String): MutableList<Organization>
+               fun update(organization: OrganizationChangeDTO): Organization
+      fun delete(id: String): String
+      }
+     class BasicServiceService implements ServiceService {
+        - val repository: ServiceRepository
+        fun create(dto: ServicesDTO, id: String): ServiceOrganization
+        fun find(id: String): ServiceOrganization
+        fun findAll(): List<ServiceOrganization>
+        fun delete(id: String): Boolean
+            fun findByIdOrg(idOrg: String): List<ServiceOrganization>
+       }
+      class BasicUserService implements UserService, UserDetailsService {
+         - val repository: UserRepository
+          fun encoder(): BCryptPasswordEncoder
+          fun create(user: User): User
+          fun find(id: String): User
+          fun findByUsername(userName: String): User
+          fun findAll(): List<User>
+              fun update(id: String, user: User): User
+              fun resetPassword(username: String): String?
+             fun delete(id: String): String
+             fun updateUser(name: String, userChange: UserChangeDTO): Boolean
+        fun loadUserByUsername(username: String?): UserDetails
+        fun generatePassayPassword(): String
+        }
+     class BasicTypeServicesService implements TypeServicesService{
+        - val repository: TypeServicesRepository
+         fun getTypeById(idType: String): TypeServices
+       fun  findAll(): List<TypeServices>
+         fun create(type: TypeServices)
+       }
+     class BasicSupportService implements ISupportService {
+        - val repository: ISupportRepository
+        fun createSupport(support: Support): Support
+       }
+@enduml

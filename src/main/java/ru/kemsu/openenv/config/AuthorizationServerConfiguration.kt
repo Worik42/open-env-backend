@@ -25,8 +25,10 @@ import ru.kemsu.openenv.service.BasicUserService
 class AuthorizationServerConfiguration : AuthorizationServerConfigurerAdapter() {
     @Autowired
     private val authenticationManager: AuthenticationManager? = null
+
     @Autowired
     private val passwordEncoder: PasswordEncoder? = null
+
     @Autowired
     private val userDetailsService: BasicUserService? = null
 
@@ -81,3 +83,20 @@ class AuthorizationServerConfiguration : AuthorizationServerConfigurerAdapter() 
         return defaultTokenServices
     }
 }
+/***
+ * @startuml
+ * class AuthorizationServerConfiguration {
+ * private val authenticationManager: AuthenticationManager
+ * private val passwordEncoder: PasswordEncoder
+ * private val userDetailsService: BasicUserService
+ * fun tokenEnhancer(): TokenEnhancer
+ * fun configure(security: AuthorizationServerSecurityConfigurer)
+ * fun configure(clients: ClientDetailsServiceConfigurer)
+ * fun configure(endpoints: AuthorizationServerEndpointsConfigurer)
+ * fun tokenStore(): TokenStore
+ * fun accessTokenConverter(): JwtAccessTokenConverter
+ * fun tokenServices(): DefaultTokenServices
+ * }
+ *
+ * @enduml
+ */

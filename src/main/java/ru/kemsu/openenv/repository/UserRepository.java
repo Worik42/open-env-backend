@@ -11,3 +11,9 @@ public interface UserRepository extends MongoRepository<User, String> {
     User findByUsername(final String userName);
 
 }
+/**
+ * @startuml interface ServiceRepository {
+ * fun findByUsername(userName: String): User
+ * }
+ * @enduml
+ */

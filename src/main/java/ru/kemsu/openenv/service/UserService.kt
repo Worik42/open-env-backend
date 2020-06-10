@@ -1,28 +1,32 @@
-package ru.kemsu.openenv.service;
+package ru.kemsu.openenv.service
 
-import ru.kemsu.openenv.dto.UserChangeDTO;
-import ru.kemsu.openenv.model.User;
+import ru.kemsu.openenv.dto.UserChangeDTO
+import ru.kemsu.openenv.model.User
 
-import java.util.List;
+/**
+ * @startuml
+ * interface UserService {
+ * fun create(user: User): User
+ * fun find(id: String): User
+ * fun findByUsername(userName: String): User
+ * fun findAll(): List<User>
+ *     fun update(id: String, user: User): User
+fun delete(id: String): String
+fun changeRole(name: String, isAdmin: Boolean): User
+fun resetPassword(username: String): String
+fun updateUser(name: String, userChange: UserChangeDTO): Boolean
 
-
-public interface UserService {
-
-    User create(User object);
-
-    User find(String id);
-
-    User findByUsername(String userName);
-
-    List<User> findAll();
-
-    User update(String id, User object);
-
-    String delete(String id);
-
-    User changeRole(String name, boolean isAdmin);
-
-    String resetPassword(String username);
-
-    boolean updateUser(String name, UserChangeDTO userChange);
+ * }
+ * @enduml
+ */
+interface UserService {
+    fun create(user: User): User
+    fun find(id: String): User
+    fun findByUsername(userName: String): User
+    fun findAll(): List<User>
+    fun update(id: String, user: User): User
+    fun delete(id: String): String
+    fun changeRole(name: String, isAdmin: Boolean): User?
+    fun resetPassword(username: String): String?
+    fun updateUser(name: String, userChange: UserChangeDTO): Boolean
 }

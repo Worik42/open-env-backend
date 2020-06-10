@@ -13,3 +13,10 @@ public interface OrganisationRepository extends MongoRepository<Organization, St
 
     List<Organization> findByIdTypeServices(final String idType);
 }
+/**
+ * @startuml interface OrganisationRepository {
+ * fun findByName(organisationName: String): Organization
+ * fun findByIdTypeServices(idType: String): List<Organization>
+ * }
+ * @enduml
+ */

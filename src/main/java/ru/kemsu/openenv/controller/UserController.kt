@@ -59,3 +59,14 @@ class UserController @Autowired constructor(private val service: UserService, pr
 
 
 }
+/**
+ * @startuml
+ * class TypeServicesController {
+ *  - val service: UserService
+ *  - val emailSender: JavaMailSender
+ *  fun resetPwd(): ResponseEntity<*>
+ *  fun getUserInformation(): ResponseEntity<*>
+ *  fun updateUser(@RequestBody userChange: UserChangeDTO): ResponseEntity<*>
+ * }
+ * @enduml
+ */

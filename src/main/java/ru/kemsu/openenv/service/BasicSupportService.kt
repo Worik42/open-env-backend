@@ -6,6 +6,16 @@ import ru.kemsu.openenv.model.Support
 import ru.kemsu.openenv.repository.ISupportRepository
 import java.time.LocalDateTime
 
+/**
+ * @startuml
+ * class BasicSupportService implements ISupportService {
+ *  - val repository: ISupportRepository
+ *  fun createSupport(support: Support): Support
+ * }
+ * @enduml
+ */
+
+
 @Service
 class BasicSupportService @Autowired constructor(private val repository: ISupportRepository) : ISupportService {
     override fun createSupport(support: Support): Support {

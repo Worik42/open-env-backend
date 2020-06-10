@@ -45,3 +45,17 @@ class BasicOrganizationService @Autowired constructor(private val repository: Or
     }
 
 }
+/**
+ * @startuml
+ * class BasicOrganizationService implements OrganizationService {
+ *  - val repository: OrganisationRepository
+ *  fun create(organisation: Organization): Organization
+ *  fun find(id: String): Organization
+ *  fun findByName(organisationName: String): Organization
+ *  fun findAll(): List<Organization>
+ *      fun findByIdType(idType: String): MutableList<Organization>
+ *          fun update(organization: OrganizationChangeDTO): Organization
+ * fun delete(id: String): String
+ * }
+ * @enduml
+ */

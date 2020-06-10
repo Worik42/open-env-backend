@@ -7,3 +7,9 @@ import ru.kemsu.openenv.model.TypeServices
 @Repository
 interface TypeServicesRepository : MongoRepository<TypeServices, String> {
 }
+/**
+ * @startuml
+ * interface TypeServicesRepository {
+ * }
+ * @enduml
+ */

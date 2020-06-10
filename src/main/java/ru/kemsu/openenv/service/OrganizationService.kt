@@ -1,23 +1,27 @@
-package ru.kemsu.openenv.service;
+package ru.kemsu.openenv.service
 
-import ru.kemsu.openenv.dto.OrganizationChangeDTO;
-import ru.kemsu.openenv.model.Organization;
+import ru.kemsu.openenv.dto.OrganizationChangeDTO
+import ru.kemsu.openenv.model.Organization
 
-import java.util.List;
-
-public interface OrganizationService {
-
-    Organization create(Organization object);
-
-    Organization find(String id);
-
-    Organization findByName(String organisationName);
-
-    List<Organization> findAll();
-
-    Organization update(OrganizationChangeDTO organization);
-
-    String delete(String id);
-
-    List<Organization> findByIdType(String idType);
+/**
+ * @startuml
+ * interface OrganizationService {
+ * fun create(org: Organization): Organization
+ * fun find(id: String): Organization
+ * fun findByName(organisationName: String): Organization
+ * fun findAll(): List<Organization>
+ *     fun update(organization: OrganizationChangeDTO): Organization
+ *     fun delete(id: String): String
+ *     fun findByIdType(idType: String): List<Organization>
+ * }
+ * @enduml
+ */
+interface OrganizationService {
+    fun create(org: Organization): Organization
+    fun find(id: String): Organization
+    fun findByName(organisationName: String): Organization
+    fun findAll(): List<Organization>
+    fun update(organization: OrganizationChangeDTO): Organization
+    fun delete(id: String): String
+    fun findByIdType(idType: String): List<Organization>
 }

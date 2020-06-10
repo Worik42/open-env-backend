@@ -21,6 +21,25 @@ import ru.kemsu.openenv.repository.UserRepository
 import java.time.LocalDateTime
 import java.util.*
 
+/**
+ * @startuml
+ * class BasicUserService implements UserService, UserDetailsService {
+ *  - val repository: UserRepository
+ *   fun encoder(): BCryptPasswordEncoder
+ *   fun create(user: User): User
+ *   fun find(id: String): User
+ *   fun findByUsername(userName: String): User
+ *   fun findAll(): List<User>
+ *       fun update(id: String, user: User): User
+ *       fun resetPassword(username: String): String?
+ *      fun delete(id: String): String
+ *      fun updateUser(name: String, userChange: UserChangeDTO): Boolean
+ * fun loadUserByUsername(username: String?): UserDetails
+ * fun generatePassayPassword(): String
+ * }
+ * @enduml
+ */
+
 @Service
 class BasicUserService @Autowired constructor(private val repository: UserRepository) : UserService, UserDetailsService {
 

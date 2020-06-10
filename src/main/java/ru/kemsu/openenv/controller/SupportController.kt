@@ -28,3 +28,11 @@ class SupportController @Autowired constructor(private val service: ISupportServ
     }
 
 }
+/**
+ * @startuml
+ * class SupportController {
+ *  -val service: ISupportService
+ *  fun report(@RequestBody supp: SupportDTO): ResponseEntity<*>
+ * }
+ * @enduml
+ */

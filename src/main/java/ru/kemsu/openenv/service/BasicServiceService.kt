@@ -8,6 +8,19 @@ import ru.kemsu.openenv.model.Position
 import ru.kemsu.openenv.model.ServiceOrganization
 import ru.kemsu.openenv.repository.ServiceRepository
 
+/**
+ * @startuml
+ * class BasicServiceService implements ServiceService {
+ *  - val repository: ServiceRepository
+ *  fun create(dto: ServicesDTO, id: String): ServiceOrganization
+ *  fun find(id: String): ServiceOrganization
+ *  fun findAll(): List<ServiceOrganization>
+ *  fun delete(id: String): Boolean
+ *      fun findByIdOrg(idOrg: String): List<ServiceOrganization>
+ * }
+ * @enduml
+ */
+
 @Service
 class BasicServiceService @Autowired constructor(private val repository: ServiceRepository) : ServiceService {
     override fun create(dto: ServicesDTO, id: String): ServiceOrganization {

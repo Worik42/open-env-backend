@@ -10,3 +10,10 @@ interface ServiceRepository : MongoRepository<ServiceOrganization, String> {
     fun findByIdOrganization(idOrganiztion: String): List<ServiceOrganization>
 
 }
+/**
+ * @startuml
+ * interface ServiceRepository {
+ * fun findByIdOrganization(idOrganiztion: String): List<ServiceOrganization>
+ * }
+ * @enduml
+ */

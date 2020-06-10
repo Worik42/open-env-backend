@@ -45,3 +45,17 @@ class ServiceController @Autowired constructor(private val service: ServiceServi
 
 
 }
+/**
+ * @startuml
+ *
+ * class ServiceController {
+ *  -val service: ServiceService
+ *  -val serviceOrganization: OrganizationService
+ *  fun createService(@RequestBody dto: ServicesDTO, @PathVariable id: String): ResponseEntity<*>
+ *  fun changeService(@RequestBody dto: ServicesChangeDTO): ResponseEntity<*>
+ *  fun deleteService(@PathVariable id: String): ResponseEntity<*>
+ *  fun getServices(@PathVariable id_organization: String): ResponseEntity<*>
+ *  fun getAllServices(): ResponseEntity<*>
+ * }
+ * @enduml
+ */

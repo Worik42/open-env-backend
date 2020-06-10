@@ -51,3 +51,18 @@ class OrganizationController @Autowired constructor(private val service: Organiz
         return ResponseEntity(service.findByIdType(id_type), HttpStatus.OK)
     }
 }
+/**
+ * @startuml
+ *
+ * class OrganizationController {
+ *  -val service: OrganizationService
+ *    - val serviceType: TypeServicesService
+ *  fun createOrganization(@RequestBody dto: OrganizationDTO): ResponseEntity<*>
+ *  fun deleteOrganization(@PathVariable org_id: String): ResponseEntity<*>
+ *  fun changeOrganization(@RequestBody dto: OrganizationChangeDTO): ResponseEntity<*>
+ *  fun getOrganizations(): ResponseEntity<List<Organization>>
+ *  fun getOrganization(@PathVariable org_id: String): ResponseEntity<*>
+ *  fun getOrganizationByIdType(@PathVariable id_type: String): ResponseEntity<*>
+ * }
+ * @enduml
+ */
