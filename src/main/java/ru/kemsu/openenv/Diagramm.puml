@@ -120,14 +120,7 @@ interface OrganizationService {
          }
 class BasicOrganizationService implements OrganizationService {
        - val repository: OrganisationRepository
-       fun create(organisation: Organization): Organization
-       fun find(id: String): Organization
-       fun findByName(organisationName: String): Organization
-       fun findAll(): List<Organization>
-           fun findByIdType(idType: String): MutableList<Organization>
-               fun update(organization: OrganizationChangeDTO): Organization
-      fun delete(id: String): String
-      }
+       }
 }
 
 package ru.kemsu.openenv.service.service {
@@ -146,12 +139,7 @@ interface ServiceService {
           }
 class BasicServiceService implements ServiceService {
         - val repository: ServiceRepository
-        fun create(dto: ServicesDTO, id: String): ServiceOrganization
-        fun find(id: String): ServiceOrganization
-        fun findAll(): List<ServiceOrganization>
-        fun delete(id: String): Boolean
-            fun findByIdOrg(idOrg: String): List<ServiceOrganization>
-       }
+        }
 }
 
        package ru.kemsu.openenv.service.support {
@@ -162,7 +150,6 @@ class BasicServiceService implements ServiceService {
                }
         class BasicSupportService implements ISupportService {
                - val repository: ISupportRepository
-               fun createSupport(support: Support): Support
               }
      }
 
@@ -178,10 +165,7 @@ interface TypeServicesService {
            }
 class BasicTypeServicesService implements TypeServicesService{
         - val repository: TypeServicesRepository
-         fun getTypeById(idType: String): TypeServices
-       fun  findAll(): List<TypeServices>
-         fun create(type: TypeServices)
-       }
+         }
 }
        package ru.kemsu.openenv.service.user {
        interface UserRepository {
@@ -201,17 +185,7 @@ class BasicTypeServicesService implements TypeServicesService{
                    }
        class BasicUserService implements UserService, UserDetailsService {
                 - val repository: UserRepository
-                 fun encoder(): BCryptPasswordEncoder
-                 fun create(user: User): User
-                 fun find(id: String): User
-                 fun findByUsername(userName: String): User
-                 fun findAll(): List<User>
-                     fun update(id: String, user: User): User
-                     fun resetPassword(username: String): String?
-                    fun delete(id: String): String
-                    fun updateUser(name: String, userChange: UserChangeDTO): Boolean
-               fun loadUserByUsername(username: String?): UserDetails
-               fun generatePassayPassword(): String
+                fun generatePassayPassword(): String
                }
 
        }
