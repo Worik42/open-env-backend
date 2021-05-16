@@ -67,7 +67,7 @@ class SecurityConfiguration : WebSecurityConfigurerAdapter() {
                 .csrf().disable()
                 .anonymous().disable()
                 .authorizeRequests()
-                .antMatchers("/v2/api-docs/**").permitAll()
+                .antMatchers("/v2/api-docs/**", "/api/swagger-ui/**").permitAll()
 //        http.requestMatchers()
 //                .antMatchers("/login", "/oauth/authorize")
 //                .and()
