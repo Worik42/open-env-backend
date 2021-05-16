@@ -9,11 +9,11 @@ import javax.validation.constraints.NotNull
 
 @Serializable
 data class ClaimDTO(
-        @field:NotNull
+        @NotNull
         @JsonProperty("id_service")
         val idService: String,
 
-        @field:NotNull
+        @NotNull
         @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
         val time: @Contextual Date,
 
